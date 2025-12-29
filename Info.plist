@@ -46,7 +46,7 @@
 		<string>x86_64</string>
 	</array>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.8</string>
+	<string>11.0</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>©2017 Kornel Lesiński</string>
 	<key>NSMainNibFile</key>
@@ -55,10 +55,6 @@
 	<string>NSApplication</string>
 	<key>NSSupportsAutomaticGraphicsSwitching</key>
 	<true/>
-	<key>SUFeedURL</key>
-	<string>https://pngmini.com/appcast.xml</string>
-	<key>SUPublicDSAKeyFile</key>
-	<string>dsa_pub.pem</string>
 	<key>SUShowReleaseNotes</key>
 	<true/>
 </dict>

@@ -1,5 +1,6 @@
 #
 #  IAImageViewInteractive.py
+import objc
 from objc import *
 from Foundation import *
 from AppKit import *
@@ -144,4 +145,3 @@ class IAImageViewInteractive(IAImageView):
 
     def otherMouseUp_(self,event):
         self.setDrawAlternateImage_(NO)
-

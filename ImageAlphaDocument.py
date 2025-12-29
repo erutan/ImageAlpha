@@ -2,6 +2,7 @@
 #
 #  IAController.py
 
+import objc
 from objc import *
 from Foundation import *
 import IAImageView
@@ -54,6 +55,7 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 
 		self._endWork();
 
+	@objc.python_method
 	def updateZoomedImageViewAlternateImage(self, zoomToFill=False):
 		if self.zoomedImageView() is not None and self.documentImage() is not None:
 			self.zoomedImageView().setAlternateImage_(self.documentImage().image())
@@ -206,10 +208,11 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 			if source_filesize is None or source_filesize < data.length():
 				msg = "Image size: %d bytes" % data.length()
 			else:
-				percent = 100-data.length()*100/source_filesize
+				percent = 100 - (data.length() * 100 // source_filesize)
 				msg = "Image size: %d bytes (saved %d%% of %d bytes)" % (data.length(), percent, source_filesize)
 			self.setStatusMessage_(msg)
 
+	@objc.python_method
 	def _getImage(self,name,ext="png"):
 		path = NSBundle.mainBundle().resourcePath().stringByAppendingPathComponent_(name).stringByAppendingPathExtension_(ext);
 		image = NSImage.alloc().initWithContentsOfFile_(path);

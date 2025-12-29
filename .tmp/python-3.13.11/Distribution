@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<installer-gui-script minSpecVersion="1">
+    <title>Python</title>
+    <background alignment="left" file="background.jpg" mime-type="image/png"/>
+    <welcome file="Welcome.rtf" mime-type="text/richtext"/>
+    <readme file="ReadMe.rtf" mime-type="text/richtext"/>
+    <license file="License.rtf" mime-type="text/richtext"/>
+    <conclusion file="Conclusion.rtf" mime-type="text/richtext"/>
+    <options customize="allow" require-scripts="false" rootVolumeOnly="true" hostArchitectures="arm64,x86_64"/>
+    <choices-outline>
+        <line choice="org.python.Python.PythonFramework-3.13"/>
+        <line choice="org.python.Python.PythonApplications-3.13"/>
+        <line choice="org.python.Python.PythonUnixTools-3.13"/>
+        <line choice="org.python.Python.PythonDocumentation-3.13"/>
+        <line choice="org.python.Python.PythonProfileChanges-3.13"/>
+        <line choice="org.python.Python.PythonInstallPip-3.13"/>
+        <line choice="org.python.Python.PythonTFramework-3.13"/>
+    </choices-outline>
+    <choice id="default"/>
+    <choice id="org.python.Python.PythonFramework-3.13" visible="true" selected="true" enabled="false" title="Python Framework" description="This package installs Python.framework, that is the python interpreter and the standard library.">
+        <pkg-ref id="org.python.Python.PythonFramework-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonApplications-3.13" visible="true" title="GUI Applications" description="This package installs IDLE (an interactive Python IDE), and Python Launcher.  It also installs a number of examples and demos.">
+        <pkg-ref id="org.python.Python.PythonApplications-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonUnixTools-3.13" visible="true" title="UNIX command-line tools" description="This package installs the unix tools in /usr/local/bin for compatibility with older releases of Python. This package is not necessary to use Python.">
+        <pkg-ref id="org.python.Python.PythonUnixTools-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonDocumentation-3.13" visible="true" title="Python Documentation" description="This package installs the python documentation at a location that is useable for pydoc and IDLE.">
+        <pkg-ref id="org.python.Python.PythonDocumentation-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonProfileChanges-3.13" visible="true" start_selected="true" title="Shell profile updater" description="This packages updates your shell profile to make sure that the Python tools are found by your shell in preference of the system provided Python tools.  If you don't install this package you'll have to add '/Library/Frameworks/Python.framework/Versions/3.13/bin' to your PATH by hand.">
+        <pkg-ref id="org.python.Python.PythonProfileChanges-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonInstallPip-3.13" visible="true" start_selected="true" title="Install or upgrade pip" description="This package installs (or upgrades from an earlier version) pip, a tool for installing and managing Python packages.">
+        <pkg-ref id="org.python.Python.PythonInstallPip-3.13"/>
+    </choice>
+    <choice id="org.python.Python.PythonTFramework-3.13" visible="true" start_selected="false" title="Free-threaded Python [experimental]" description="This optional package installs a free-threaded Python framework, including a separate Python interpeter capable of running without the global interpreter lock. It is installed independently of the normal interpeter and includes its own standard library and site-packages. See the installer ReadMe and the release notice for more information. ">
+        <pkg-ref id="org.python.Python.PythonTFramework-3.13"/>
+    </choice>
+    <pkg-ref id="org.python.Python.PythonFramework-3.13" version="0" auth="Root" onConclusion="none" installKBytes="107235" updateKBytes="0">#Python_Framework.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonApplications-3.13" version="0" auth="Root" onConclusion="none" installKBytes="611" updateKBytes="0">#Python_Applications.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonUnixTools-3.13" version="0" auth="Root" onConclusion="none" installKBytes="9" updateKBytes="0">#Python_Command_Line_Tools.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonDocumentation-3.13" version="0" auth="Root" onConclusion="none" installKBytes="71272" updateKBytes="0">#Python_Documentation.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonProfileChanges-3.13" version="0" auth="Root" onConclusion="none" installKBytes="0" updateKBytes="0">#Python_Shell_Profile_Updater.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonInstallPip-3.13" version="0" auth="Root" onConclusion="none" installKBytes="0" updateKBytes="0">#Python_Install_Pip.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonTFramework-3.13" version="0" auth="Root" onConclusion="none" installKBytes="79002" updateKBytes="0">#PythonT_Framework.pkg</pkg-ref>
+    <pkg-ref id="org.python.Python.PythonFramework-3.13">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11" id="org.python.python" path="Versions/3.13/Resources/Python.app"/>
+        </bundle-version>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonApplications-3.13">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11" id="org.python.PythonLauncher" path="Python 3.13/Python Launcher.app"/>
+            <bundle CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11" id="org.python.IDLE" path="Python 3.13/IDLE.app"/>
+        </bundle-version>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonUnixTools-3.13">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonDocumentation-3.13">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonProfileChanges-3.13">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonInstallPip-3.13">
+        <bundle-version/>
+    </pkg-ref>
+    <pkg-ref id="org.python.Python.PythonTFramework-3.13">
+        <bundle-version>
+            <bundle CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11" id="org.python.pythont" path="Versions/3.13/Resources/Python.app"/>
+        </bundle-version>
+    </pkg-ref>
+</installer-gui-script>

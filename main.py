@@ -1,10 +1,7 @@
 #
 #  main.py
 
-# can't avoid default encoding. Python dies in a system-initiated callback due to pretending it's still 1963.
-import sys
-reload(sys);
-sys.setdefaultencoding("utf8");
+# Python 3 uses UTF-8 by default; no encoding override needed.
 
 #import modules required by application
 import objc

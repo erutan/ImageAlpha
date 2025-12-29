@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pkg-info overwrite-permissions="true" relocatable="false" identifier="org.python.Python.PythonTFramework-3.13" postinstall-action="none" version="0" format-version="2" generator-version="InstallCmds-864 (25B78)" install-location="/Library/Frameworks/PythonT.framework" auth="root">
+    <payload numberOfFiles="3043" installKBytes="79002"/>
+    <bundle path="./Versions/3.13/Resources/Python.app" id="org.python.pythont" CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11"/>
+    <bundle-version>
+        <bundle id="org.python.pythont"/>
+    </bundle-version>
+    <upgrade-bundle>
+        <bundle id="org.python.pythont"/>
+    </upgrade-bundle>
+    <update-bundle/>
+    <atomic-update-bundle/>
+    <strict-identifier>
+        <bundle id="org.python.pythont"/>
+    </strict-identifier>
+    <relocate/>
+    <scripts>
+        <postinstall file="./postinstall" timeout="600"/>
+    </scripts>
+</pkg-info>

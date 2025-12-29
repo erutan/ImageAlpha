@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pkg-info overwrite-permissions="true" relocatable="false" identifier="org.python.Python.PythonApplications-3.13" postinstall-action="none" version="0" format-version="2" generator-version="InstallCmds-864 (25B78)" install-location="/Applications" auth="root">
+    <payload numberOfFiles="52" installKBytes="611"/>
+    <bundle path="./Python 3.13/Python Launcher.app" id="org.python.PythonLauncher" CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11"/>
+    <bundle path="./Python 3.13/IDLE.app" id="org.python.IDLE" CFBundleShortVersionString="3.13.11" CFBundleVersion="3.13.11"/>
+    <bundle-version>
+        <bundle id="org.python.PythonLauncher"/>
+        <bundle id="org.python.IDLE"/>
+    </bundle-version>
+    <upgrade-bundle>
+        <bundle id="org.python.PythonLauncher"/>
+        <bundle id="org.python.IDLE"/>
+    </upgrade-bundle>
+    <update-bundle/>
+    <atomic-update-bundle/>
+    <strict-identifier>
+        <bundle id="org.python.PythonLauncher"/>
+        <bundle id="org.python.IDLE"/>
+    </strict-identifier>
+    <relocate/>
+</pkg-info>

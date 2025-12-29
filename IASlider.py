@@ -2,6 +2,7 @@
 #
 #  IASlider.py
 
+import objc
 from objc import YES, NO, IBAction, IBOutlet
 from Foundation import *
 from AppKit import *
@@ -81,5 +82,4 @@ class IABitDepthReverseTransformer(NSValueTransformer):
         value = int(value);
         if (value <= 1): return 2;
         return pow(2,value);
-
 

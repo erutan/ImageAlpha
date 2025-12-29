@@ -1,0 +1,33 @@
+#!/bin/sh
+#
+# Recompile the .py files.
+#
+
+PYVER="3.13"
+FWK="/Library/Frameworks/Python.framework/Versions/3.13"
+
+"${FWK}/bin/python3.13" -E -s -Wi \
+    "${FWK}/lib/python${PYVER}/compileall.py" -q -j0 \
+    -f -x 'bad_coding|badsyntax|site-packages' \
+    "${FWK}/lib/python${PYVER}"
+
+"${FWK}/bin/python3.13" -E -s -Wi -O \
+    "${FWK}/lib/python${PYVER}/compileall.py" -q -j0 \
+    -f -x 'bad_coding|badsyntax|site-packages' \
+    "${FWK}/lib/python${PYVER}"
+
+"${FWK}/bin/python3.13" -E -s -Wi \
+    "${FWK}/lib/python${PYVER}/compileall.py" -q -j0 \
+    -f -x badsyntax \
+    "${FWK}/lib/python${PYVER}/site-packages"
+
+"${FWK}/bin/python3.13" -E -s -Wi -O \
+    "${FWK}/lib/python${PYVER}/compileall.py" -q -j0 \
+    -f -x badsyntax \
+    "${FWK}/lib/python${PYVER}/site-packages"
+
+chgrp -R admin "${FWK}"
+chmod -R g+w "${FWK}"
+chmod -R g-w "${FWK}/lib/python${PYVER}/venv/scripts/"
+
+exit 0

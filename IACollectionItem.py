@@ -2,6 +2,7 @@
 #  IACollectionItem.py
 
 from Foundation import *
+import objc
 from objc import *
 from AppKit import *
 from random import randint
@@ -160,5 +161,4 @@ class IACollectionView(NSCollectionView):
         # FIXME: remove from notification queue when deallocing!
         NSNotificationCenter.defaultCenter().addObserver_selector_name_object_(colitem,colitem.imageChangedNotification_, u"ImageChanged", self)
         return colitem;
-
 

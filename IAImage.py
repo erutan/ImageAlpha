@@ -113,12 +113,12 @@ class IAImage(NSObject):
         return self._imageData;
 
     def sourceFileSize(self):
-		return self._sourceFileSize;
+        return self._sourceFileSize;
 
     def setPath_(self,path):
-		self.path = path
-		(attrs,error) = NSFileManager.defaultManager().attributesOfItemAtPath_error_(self.path,None);
-		self._sourceFileSize = attrs.objectForKey_(NSFileSize) if attrs is not None and error is None else None;
+        self.path = path
+        (attrs,error) = NSFileManager.defaultManager().attributesOfItemAtPath_error_(self.path,None);
+        self._sourceFileSize = attrs.objectForKey_(NSFileSize) if attrs is not None and error is None else None;
 
     def ieMode(self):
         return self._ieMode
@@ -137,7 +137,15 @@ class IAImage(NSObject):
         self.update()
 
     def updateDithering(self):
-        self.setDithering_(NSUserDefaults.standardUserDefaults().get("dithered", self.quantizer().preferredDithering()))
+        defaults = NSUserDefaults.standardUserDefaults()
+        stored = defaults.objectForKey_("dithered")
+        if stored is None:
+            value = self.quantizer().preferredDithering()
+        elif hasattr(stored, "boolValue"):
+            value = stored.boolValue()
+        else:
+            value = bool(stored)
+        self.setDithering_(value)
 
     def numberOfColors(self):
         return self._numberOfColors
@@ -260,5 +268,3 @@ class IAImageVersion(NSObject):
         if self.outputPipe:
             self.outputPipe.fileHandleForReading().closeFile()
             self.outputPipe = None
-
-

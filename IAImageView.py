@@ -1,6 +1,7 @@
 #
 #  IAImageView.py
 
+import objc
 from objc import *
 from Foundation import *
 from AppKit import *
@@ -94,6 +95,7 @@ class IAImageView(NSView):
     def zoomOut_(self,sender):
         self.setZoom_(self.zoom() / 2.0);
 
+    @objc.python_method
     def zoomToFill(self, zoom=1.0):
         self.zoomingToFill = zoom
         if self.image() is None: return
@@ -132,6 +134,7 @@ class IAImageView(NSView):
         self.zoomingToFill = 0
         self._setZoom(zoom);
 
+    @objc.python_method
     def _setZoom(self,zoom):
         self._zoom = min(16.0,max(1.0/128.0,zoom))
         self._limitImageOffset()
@@ -246,4 +249,3 @@ class IAImageView(NSView):
                 CATransaction.commit()
 
         super(IAImageView, self).setNeedsDisplay_(tf);
-

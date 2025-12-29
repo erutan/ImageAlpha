@@ -51,7 +51,7 @@ static CGFloat constrain(NSInteger dividerIndex, CGFloat proposedSize)
 
 -(void) setDitheredPreference:(NSMenuItem *)sender {
     for (NSMenuItem *item in sender.menu.itemArray) {
-        [item setState:item == sender ? NSOnState : NSOffState];
+        [item setState:item == sender ? NSControlStateValueOn : NSControlStateValueOff];
     }
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
