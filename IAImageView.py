@@ -63,7 +63,7 @@ class IAImageView(NSView):
         shadowWidth = 12;
 
         bounds = self.layer().bounds();
-        NSLog("bounds %d %d %d %d",bounds.size.width, bounds.size.height, bounds.origin.x, bounds.origin.y);
+        NSLog("bounds %s %s %s %s" % (bounds.size.width, bounds.size.height, bounds.origin.x, bounds.origin.y));
 
         shadow1 = CAGradientLayer.layer();
         stops = [CGColorCreateGenericRGB(0,0,0,x) for x in [0, 0.04, 0.11, 0.3]]

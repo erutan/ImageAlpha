@@ -230,6 +230,13 @@ class IAImageVersion(NSObject):
         task = NSTask.alloc().init()
 
         exePath = NSBundle.mainBundle().pathForAuxiliaryExecutable_(executable)
+        if not exePath:
+            NSLog("Missing helper executable: %s" % executable)
+            self.isDone = True
+            self.imageData = NSData.dataWithContentsOfFile_(path)
+            if self.callbackWhenFinished is not None:
+                self.callbackWhenFinished.update()
+            return None
         task.setLaunchPath_(exePath)
         task.setCurrentDirectoryPath_(exePath.stringByDeletingLastPathComponent())
         task.setArguments_(args);
