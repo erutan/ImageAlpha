@@ -145,9 +145,11 @@ class IAImageView(NSView):
                 self.setSmooth_(YES)
         self.setNeedsDisplay_(YES)
 
+    @objc.accessor
     def image(self):
         return self._image;
 
+    @objc.accessor
     def setImage_(self,aImage):
         self._image=aImage
         if self._alternateImage and aImage:

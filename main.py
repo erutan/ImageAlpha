@@ -8,7 +8,7 @@ import objc
 import Foundation
 import AppKit
 
-objc.setVerbose(1)
+objc.setVerbose(0)
 
 from PyObjCTools import AppHelper
 
