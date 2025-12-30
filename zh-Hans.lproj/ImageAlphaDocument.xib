@@ -90,21 +90,13 @@ IA
                                     <popUpButton verticalHuggingPriority="750" tag="2" id="1111">
                                         <rect key="frame" x="17" y="439" width="210" height="26"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="push" title="Blurizer" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1187" id="1112">
+                                        <popUpButtonCell key="cell" type="push" title="Median Cut (pngquant)" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="1114" id="1112">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
                                             <menu key="menu" title="OtherViews" id="1113">
                                                 <items>
                                                     <menuItem title="Median Cut (pngquant)" id="1114">
                                                         <accessibility description="Median Cut is best for small number of colors or images with very varying colors"/>
-                                                    </menuItem>
-                                                    <menuItem title="NeuQuant (pngnq)" id="1115">
-                                                        <accessibility description="NeuQuant is best for images with gradients"/>
-                                                    </menuItem>
-                                                    <menuItem isSeparatorItem="YES" id="1189"/>
-                                                    <menuItem title="Blurizer" state="on" id="1187"/>
-                                                    <menuItem title="Posterizer" id="1116">
-                                                        <accessibility description="Posterizer reduces intensity levels in 24-bit PNGs, not total number of colors"/>
                                                     </menuItem>
                                                 </items>
                                             </menu>

@@ -112,7 +112,7 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 				NSLog("Could not launch ImageOptim for %s" % url);
 
 	def setStatusMessage_(self,msg):
-		NSLog("(status) %s" % msg);
+		NSLog("%@", "(status) " + msg);
 		if self.statusBarView is not None: self.statusBarView.setStringValue_(msg);
 
 	def canSetDocumentImageFromPasteboard_(self,pboard):

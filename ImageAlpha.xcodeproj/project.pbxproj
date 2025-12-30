@@ -22,11 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5A0A24C3174843D0003264CC /* pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD180630F4B732100370142 /* pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5A0A24C3174843D0003264CC /* pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D8D2A278C044808BD473D3F /* pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A1C388D1F2A3D0400E21DAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C38831F2A3CDB00E21DAC /* QuartzCore.framework */; };
 		5A2C9C61150EAFE600E9245E /* IAPatternBackgroundRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C9C60150EAFE600E9245E /* IAPatternBackgroundRenderer.m */; };
 		5A3010980F55DE1B0083C154 /* textures in Resources */ = {isa = PBXBuildFile; fileRef = 5A30108D0F55DE1B0083C154 /* textures */; };
-		5A31235C1399A72500448815 /* posterizer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A3122E11399A1CF00448815 /* posterizer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A3F4E6117A1F3FE00469537 /* ImageAlphaDocumentC.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F4E6017A1F3FE00469537 /* ImageAlphaDocumentC.m */; };
 		5A3F4E8717A1F4D600469537 /* ImageAlphaApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A3F4E8617A1F4D600469537 /* ImageAlphaApplication.m */; };
 		5A43016F16629393000E55BA /* IABackgroundRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A43016E16629393000E55BA /* IABackgroundRenderer.m */; };
@@ -42,7 +41,6 @@
 		5AA5327E0EE32FC700360305 /* IAImage.py in Resources */ = {isa = PBXBuildFile; fileRef = 5AA5327D0EE32FC700360305 /* IAImage.py */; };
 		5AA9BABA14268CED007E98AA /* Python.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA9BAB914268CED007E98AA /* Python.framework */; };
 		5AABCD0014268CED007E98AA /* Python.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 5AA9BAB914268CED007E98AA /* Python.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		5ABD76510F0E791500515CC9 /* pngnq in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5ABD76500F0E78E700515CC9 /* pngnq */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		77383F230C07AB8F0043B131 /* main.py in Resources */ = {isa = PBXBuildFile; fileRef = 77383F220C07AB8F0043B131 /* main.py */; };
 		779AE5FB0C0A0980000694DF /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779AE5F70C0A0980000694DF /* MainMenu.xib */; };
 		779AE5FC0C0A0980000694DF /* ImageAlphaDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779AE5F90C0A0980000694DF /* ImageAlphaDocument.xib */; };
@@ -51,82 +49,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		5A3122E01399A1CF00448815 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3122DC1399A1CF00448815 /* posterizer.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DD76FB20486AB0100D96B5E;
-			remoteInfo = posterizer;
-		};
-		5A3122E21399A1E900448815 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3122DC1399A1CF00448815 /* posterizer.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DD76FA90486AB0100D96B5E;
-			remoteInfo = posterizer;
-		};
-		5A52B262167FD127009153F7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1805E0F4B732100370142 /* pngquant.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 5A5E4C7D15FFE53000E92975;
-			remoteInfo = "pngquant-openmp";
-		};
-		5A63037D1534E0C80036E553 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1805E0F4B732100370142 /* pngquant.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5A630352153328890036E553;
-			remoteInfo = tests;
-		};
 		5A8CE1950F5B5E23002ED669 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
 			remoteInfo = ImageAlpha;
-		};
-		5A8DB0F8140EBBF300475FA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3123451399A6BD00448815 /* libpng.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC0620554660B00DB518D;
-			remoteInfo = libpng;
-		};
-		5A937D4F12FEDF30001D2786 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DD76FA90486AB0100D96B5E;
-			remoteInfo = pngnq;
-		};
-		5ABD764F0F0E78E700515CC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DD76FB20486AB0100D96B5E;
-			remoteInfo = pngnq;
-		};
-		5ABD77490F0E87ED00515CC9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5ABD77440F0E87ED00515CC9;
-			remoteInfo = pngcomp;
-		};
-		5AC0D6031410520900446066 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5A3123451399A6BD00448815 /* libpng.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 5AC2B4D613394EDA00376783;
-			remoteInfo = static;
-		};
-		5AD180620F4B732100370142 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5AD1805E0F4B732100370142 /* pngquant.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DD76FB20486AB0100D96B5E;
-			remoteInfo = pngquant;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -148,9 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				5ABD76510F0E791500515CC9 /* pngnq in CopyFiles */,
 				5A0A24C3174843D0003264CC /* pngquant in CopyFiles */,
-				5A31235C1399A72500448815 /* posterizer in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,8 +93,6 @@
 		5A2C9C5F150EAFE500E9245E /* IAPatternBackgroundRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPatternBackgroundRenderer.h; sourceTree = "<group>"; };
 		5A2C9C60150EAFE600E9245E /* IAPatternBackgroundRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPatternBackgroundRenderer.m; sourceTree = "<group>"; };
 		5A30108D0F55DE1B0083C154 /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
-		5A3122DC1399A1CF00448815 /* posterizer.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = posterizer.xcodeproj; path = "mediancut-posterizer/posterizer.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		5A3123451399A6BD00448815 /* libpng.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libpng.xcodeproj; path = ../ImageOptim/libpng/libpng.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5A3F4E5F17A1F3FE00469537 /* ImageAlphaDocumentC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAlphaDocumentC.h; sourceTree = "<group>"; };
 		5A3F4E6017A1F3FE00469537 /* ImageAlphaDocumentC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageAlphaDocumentC.m; sourceTree = "<group>"; };
 		5A3F4E8517A1F4D600469537 /* ImageAlphaApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageAlphaApplication.h; sourceTree = "<group>"; };
@@ -179,6 +103,7 @@
 		5A6E7F90153C99F400D00506 /* IAColorBackgroundRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAColorBackgroundRenderer.h; sourceTree = "<group>"; };
 		5A6E7F91153C99F400D00506 /* IAColorBackgroundRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAColorBackgroundRenderer.m; sourceTree = "<group>"; };
 		5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = "<group>"; };
+		6D8D2A278C044808BD473D3F /* pngquant */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/pngquant; sourceTree = SOURCE_ROOT; };
 		5A8CE14A0F5B5CDD002ED669 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		5A91FE8A0E958375004954A0 /* IACollectionItem.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IACollectionItem.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		5A91FE8D0E95837F004954A0 /* IAImageView.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IAImageView.py; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.python; };
@@ -189,8 +114,6 @@
 		5AA5327D0EE32FC700360305 /* IAImage.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IAImage.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		5AA71B4612FF268F002E5E77 /* ImageAlpha.tar.bz2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ImageAlpha.tar.bz2; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA9BAB914268CED007E98AA /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = Frameworks/Python.framework; sourceTree = SOURCE_ROOT; };
-		5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pngnq.xcodeproj; path = ../pngnq/pngnq.xcodeproj; sourceTree = SOURCE_ROOT; };
-		5AD1805E0F4B732100370142 /* pngquant.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = pngquant.xcodeproj; path = ../pngquant/pngquant.xcodeproj; sourceTree = SOURCE_ROOT; };
 		5AED10DC139BAC1400FF5C69 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
 		77383F220C07AB8F0043B131 /* main.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; lineEnding = 0; path = main.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		779AE5F80C0A0980000694DF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -244,14 +167,11 @@
 		2A37F4AAFDCFA73011CA2CEA /* ImageAlpha */ = {
 			isa = PBXGroup;
 			children = (
-				5A3123451399A6BD00448815 /* libpng.xcodeproj */,
-				5A3122DC1399A1CF00448815 /* posterizer.xcodeproj */,
-				5AD1805E0F4B732100370142 /* pngquant.xcodeproj */,
-				5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */,
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				5AED10DC139BAC1400FF5C69 /* debug.xcconfig */,
 				5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */,
+				6D8D2A278C044808BD473D3F /* pngquant */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -306,22 +226,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5A3122DD1399A1CF00448815 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5A3122E11399A1CF00448815 /* posterizer */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5A3123461399A6BD00448815 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5AC0D6041410520900446066 /* libstatic.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		5A91FE9B0E958383004954A0 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,24 +252,6 @@
 			name = Image;
 			sourceTree = "<group>";
 		};
-		5ABD764C0F0E78E700515CC9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5ABD774A0F0E87ED00515CC9 /* pngcomp */,
-				5ABD76500F0E78E700515CC9 /* pngnq */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		5AD1805F0F4B732100370142 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5AD180630F4B732100370142 /* pngquant */,
-				5A63037E1534E0C80036E553 /* pngquant-tests */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -382,10 +268,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5A52B263167FD127009153F7 /* PBXTargetDependency */,
-				5A8DB0F9140EBBF300475FA3 /* PBXTargetDependency */,
-				5A937D5012FEDF30001D2786 /* PBXTargetDependency */,
-				5A3122E31399A1E900448815 /* PBXTargetDependency */,
 			);
 			name = ImageAlpha;
 			productInstallPath = "$(HOME)/Applications";
@@ -419,24 +301,6 @@
 			);
 			mainGroup = 2A37F4AAFDCFA73011CA2CEA /* ImageAlpha */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 5A3123461399A6BD00448815 /* Products */;
-					ProjectRef = 5A3123451399A6BD00448815 /* libpng.xcodeproj */;
-				},
-				{
-					ProductGroup = 5ABD764C0F0E78E700515CC9 /* Products */;
-					ProjectRef = 5ABD764B0F0E78E700515CC9 /* pngnq.xcodeproj */;
-				},
-				{
-					ProductGroup = 5AD1805F0F4B732100370142 /* Products */;
-					ProjectRef = 5AD1805E0F4B732100370142 /* pngquant.xcodeproj */;
-				},
-				{
-					ProductGroup = 5A3122DD1399A1CF00448815 /* Products */;
-					ProjectRef = 5A3122DC1399A1CF00448815 /* posterizer.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* ImageAlpha */,
@@ -446,48 +310,6 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		5A3122E11399A1CF00448815 /* posterizer */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = posterizer;
-			remoteRef = 5A3122E01399A1CF00448815 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5A63037E1534E0C80036E553 /* pngquant-tests */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = "pngquant-tests";
-			remoteRef = 5A63037D1534E0C80036E553 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5ABD76500F0E78E700515CC9 /* pngnq */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = pngnq;
-			remoteRef = 5ABD764F0F0E78E700515CC9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5ABD774A0F0E87ED00515CC9 /* pngcomp */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = pngcomp;
-			remoteRef = 5ABD77490F0E87ED00515CC9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5AC0D6041410520900446066 /* libstatic.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libstatic.a;
-			remoteRef = 5AC0D6031410520900446066 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		5AD180630F4B732100370142 /* pngquant */ = {
-			isa = PBXReferenceProxy;
-			fileType = "compiled.mach-o.executable";
-			path = pngquant;
-			remoteRef = 5AD180620F4B732100370142 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -549,30 +371,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		5A3122E31399A1E900448815 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = posterizer;
-			targetProxy = 5A3122E21399A1E900448815 /* PBXContainerItemProxy */;
-		};
-		5A52B263167FD127009153F7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "pngquant-openmp";
-			targetProxy = 5A52B262167FD127009153F7 /* PBXContainerItemProxy */;
-		};
 		5A8CE1960F5B5E23002ED669 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* ImageAlpha */;
 			targetProxy = 5A8CE1950F5B5E23002ED669 /* PBXContainerItemProxy */;
-		};
-		5A8DB0F9140EBBF300475FA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = libpng;
-			targetProxy = 5A8DB0F8140EBBF300475FA3 /* PBXContainerItemProxy */;
-		};
-		5A937D5012FEDF30001D2786 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = pngnq;
-			targetProxy = 5A937D4F12FEDF30001D2786 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

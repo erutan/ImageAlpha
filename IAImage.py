@@ -1,9 +1,12 @@
 #
 #  IAImage.py
+import objc
 from objc import *
 from Foundation import *
 from AppKit import *
 from math import log
+import os
+import shutil
 
 class Quantizer(object):
     def qualityLabel(self):
@@ -23,17 +26,19 @@ class Quantizer(object):
 
 class Pngquant(Quantizer):
     def supportsIeMode(self):
-        return True
+        return False
 
     def launchArguments(self, dither, colors, ieMode):
-        args = ["--floyd" if dither else "--nofs","%d" % colors];
-        if ieMode:
-            args.insert(0,"--iebug");
+        args = []
+        if not dither:
+            args.append("--nofs")
+        args.append("%d" % colors)
+        args.append("-")
         return ("pngquant", args)
 
 class Pngnq(Quantizer):
     def launchArguments(self, dither, colors, ieMode):
-        return ("pngnq", ["-Q","f" if dither else "n","-n","%d" % colors])
+        return ("pngnq", ["-Q","f" if dither else "n","-n","%d" % colors, "-"])
 
 class Posterizer(Quantizer):
     def qualityLabel(self):
@@ -49,6 +54,7 @@ class Posterizer(Quantizer):
         args = ["%d" % self.numberOfColorsToQuality(colors)];
         if dither:
             args.insert(0,"-d")
+        args.append("-")
         return ("posterizer",args);
 
 class Blurizer(Quantizer):
@@ -66,6 +72,7 @@ class Blurizer(Quantizer):
 
     def launchArguments(self, dither, colors, ieMode):
         args = ["-b", "%d" % self.numberOfColorsToQuality(colors)];
+        args.append("-")
         return ("posterizer",args);
 
 
@@ -80,13 +87,9 @@ class IAImage(NSObject):
 
     _numberOfColors = 256;
 
-    _quantizationMethod = 0; # 0 = pngquant; 1 = pngnq; 2 = posterizer
+    _quantizationMethod = 0; # 0 = pngquant
     _quantizationMethods = [
         Pngquant(),
-        Pngnq(),
-        None, # separator
-        Blurizer(),
-        Posterizer(),
     ]
     _dithering = YES
     _ieMode = NO
@@ -124,9 +127,8 @@ class IAImage(NSObject):
         return self._ieMode
 
     def setIeMode_(self,val):
-        self._ieMode = int(val) > 0;
-        if self._ieMode and not self.quantizer().supportsIeMode():
-            self.setQuantizationMethod_(0);
+        supports = self.quantizer().supportsIeMode()
+        self._ieMode = int(val) > 0 and supports
         self.update()
 
     def dithering(self):
@@ -161,11 +163,14 @@ class IAImage(NSObject):
         return self._quantizationMethod
 
     def quantizer(self):
+        if self._quantizationMethod >= len(self._quantizationMethods):
+            self._quantizationMethod = 0
         return self._quantizationMethods[self._quantizationMethod]
 
     def setQuantizationMethod_(self,num):
         self.willChangeValueForKey_("qualityLabel");
-        self._quantizationMethod = num
+        max_index = len(self._quantizationMethods) - 1
+        self._quantizationMethod = max(0, min(int(num), max_index))
         self.didChangeValueForKey_("qualityLabel");
 
         quantizer = self.quantizer()
@@ -229,7 +234,7 @@ class IAImageVersion(NSObject):
 
         task = NSTask.alloc().init()
 
-        exePath = NSBundle.mainBundle().pathForAuxiliaryExecutable_(executable)
+        exePath = self._findExecutable(executable)
         if not exePath:
             NSLog("Missing helper executable: %s" % executable)
             self.isDone = True
@@ -238,7 +243,7 @@ class IAImageVersion(NSObject):
                 self.callbackWhenFinished.update()
             return None
         task.setLaunchPath_(exePath)
-        task.setCurrentDirectoryPath_(exePath.stringByDeletingLastPathComponent())
+        task.setCurrentDirectoryPath_(os.path.dirname(str(exePath)))
         task.setArguments_(args);
 
         # pngout works best via standard input/output
@@ -257,6 +262,29 @@ class IAImageVersion(NSObject):
 
         task.launch();
         return task;
+
+    @objc.python_method
+    def _findExecutable(self, executable):
+        bundle = NSBundle.mainBundle()
+        exePath = bundle.pathForAuxiliaryExecutable_(executable)
+        if exePath:
+            return exePath
+
+        if bundle.resourcePath() is not None:
+            resourcePath = bundle.resourcePath().stringByAppendingPathComponent_(executable)
+            if NSFileManager.defaultManager().isExecutableFileAtPath_(resourcePath):
+                return resourcePath
+
+        path = shutil.which(executable)
+        if path:
+            return path
+
+        for prefix in ("/opt/homebrew/bin", "/usr/local/bin"):
+            candidate = os.path.join(prefix, executable)
+            if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+                return candidate
+
+        return None
 
     def onHandleReadToEndOfFile_(self,notification):
         self.isDone = True

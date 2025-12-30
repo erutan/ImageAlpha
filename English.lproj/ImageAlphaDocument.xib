@@ -98,14 +98,6 @@ IA
                                                     <menuItem title="Median Cut (pngquant)" state="on" id="1114">
                                                         <accessibility description="Median Cut is best for small number of colors or images with very varying colors"/>
                                                     </menuItem>
-                                                    <menuItem title="NeuQuant (pngnq)" id="1115">
-                                                        <accessibility description="NeuQuant is best for images with gradients"/>
-                                                    </menuItem>
-                                                    <menuItem isSeparatorItem="YES" id="1189"/>
-                                                    <menuItem title="Blurizer" id="1187"/>
-                                                    <menuItem title="Posterizer" id="1116">
-                                                        <accessibility description="Posterizer reduces intensity levels in 24-bit PNGs, not total number of colors"/>
-                                                    </menuItem>
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
