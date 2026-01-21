@@ -12,7 +12,8 @@
       "Bash(curl:*)",
       "Bash(chmod:*)",
       "Bash(lipo:*)",
-      "Bash(/tmp/zopfli/zopflipng-universal:*)"
+      "Bash(/tmp/zopfli/zopflipng-universal:*)",
+      "Bash(security find-identity:*)"
     ]
   }
 }
