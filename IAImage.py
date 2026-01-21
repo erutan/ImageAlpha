@@ -7,6 +7,8 @@ from AppKit import *
 from math import log
 import os
 import shutil
+import threading
+import uuid
 
 class Quantizer(object):
     def qualityLabel(self):
@@ -92,7 +94,7 @@ class IAImage(NSObject):
         Pngquant(),
     ]
     _dithering = YES
-    _ieMode = NO
+    _losslessMode = 1  # 0 = none, 1 = oxipng, 2 = zopflipng
 
     callbackWhenImageChanges = None
 
@@ -124,11 +126,52 @@ class IAImage(NSObject):
         self._sourceFileSize = attrs.objectForKey_(NSFileSize) if attrs is not None and error is None else None;
 
     def ieMode(self):
-        return self._ieMode
+        return self._losslessMode == 1
 
     def setIeMode_(self,val):
-        supports = self.quantizer().supportsIeMode()
-        self._ieMode = int(val) > 0 and supports
+        if int(val) > 0:
+            self._setLosslessMode(1)
+        else:
+            self._setLosslessMode(0)
+
+    def losslessNone(self):
+        return self._losslessMode == 0
+
+    def setLosslessNone_(self,val):
+        if int(val) > 0:
+            self._setLosslessMode(0)
+
+    def losslessOxipng(self):
+        return self._losslessMode == 1
+
+    def setLosslessOxipng_(self,val):
+        if int(val) > 0:
+            self._setLosslessMode(1)
+
+    def losslessZopfli(self):
+        return self._losslessMode == 2
+
+    def setLosslessZopfli_(self,val):
+        if int(val) > 0:
+            self._setLosslessMode(2)
+
+    def losslessMode(self):
+        return self._losslessMode
+
+    def setLosslessMode_(self,val):
+        self._setLosslessMode(int(val))
+
+    @objc.python_method
+    def _setLosslessMode(self, mode):
+        if self._losslessMode == mode:
+            return
+        self.willChangeValueForKey_("losslessNone")
+        self.willChangeValueForKey_("losslessOxipng")
+        self.willChangeValueForKey_("losslessZopfli")
+        self._losslessMode = mode
+        self.didChangeValueForKey_("losslessNone")
+        self.didChangeValueForKey_("losslessOxipng")
+        self.didChangeValueForKey_("losslessZopfli")
         self.update()
 
     def dithering(self):
@@ -173,9 +216,6 @@ class IAImage(NSObject):
         self._quantizationMethod = max(0, min(int(num), max_index))
         self.didChangeValueForKey_("qualityLabel");
 
-        quantizer = self.quantizer()
-        if not quantizer.supportsIeMode():
-            self.setIeMode_(False)
         self.updateDithering()
         self.update()
 
@@ -197,7 +237,7 @@ class IAImage(NSObject):
 
             elif id not in self.versions:
                 self.versions[id] = IAImageVersion.alloc().init()
-                self.versions[id].generateFromPath_method_dither_iemode_colors_callback_(self.path, self.quantizer(), self.dithering(), self.ieMode(), self.numberOfColors(), self)
+                self.versions[id].generateFromPath_method_dither_lossless_colors_callback_(self.path, self.quantizer(), self.dithering(), self.losslessMode(), self.numberOfColors(), self)
 
                 if self.callbackWhenImageChanges is not None: self.callbackWhenImageChanges.updateProgressbar();
 
@@ -208,7 +248,8 @@ class IAImage(NSObject):
                 if self.callbackWhenImageChanges is not None: self.callbackWhenImageChanges.imageChanged();
 
     def currentVersionId(self):
-        return self.quantizer().versionId(self.numberOfColors(), self.dithering(), self.ieMode());
+        base_id = self.quantizer().versionId(self.numberOfColors(), self.dithering(), self.ieMode())
+        return "%s:l%d" % (base_id, self.losslessMode())
 
     def destroy(self):
         self.callbackWhenImageChanges = None
@@ -224,15 +265,18 @@ class IAImageVersion(NSObject):
     task = None
     outputPipe = None
     callbackWhenFinished = None
+    losslessMode = 0
 
-    def generateFromPath_method_dither_iemode_colors_callback_(self,path,quantizer,dither,ieMode,colors,callbackWhenFinished):
+    def generateFromPath_method_dither_lossless_colors_callback_(self,path,quantizer,dither,losslessMode,colors,callbackWhenFinished):
 
         self.isDone = False
         self.callbackWhenFinished = callbackWhenFinished
+        self.losslessMode = int(losslessMode)
 
-        (executable, args) = quantizer.launchArguments(dither, colors, ieMode)
+        (executable, args) = quantizer.launchArguments(dither, colors, 0)
 
         task = NSTask.alloc().init()
+        self.task = task
 
         exePath = self._findExecutable(executable)
         if not exePath:
@@ -253,6 +297,7 @@ class IAImageVersion(NSObject):
         # get output via pipe
         # use pipe's file handle to construct NSData object asynchronously
         outputPipe = NSPipe.pipe();
+        self.outputPipe = outputPipe
         task.setStandardOutput_(outputPipe);
 
         # pipe *must* be read, otheriwse task will block waiting for I/O
@@ -287,11 +332,122 @@ class IAImageVersion(NSObject):
         return None
 
     def onHandleReadToEndOfFile_(self,notification):
-        self.isDone = True
+        data = notification.userInfo().objectForKey_(NSFileHandleNotificationDataItem)
+        if data is None:
+            self.isDone = True
+            if self.callbackWhenFinished is not None:
+                self.callbackWhenFinished.update()
+            return
 
-        self.imageData = notification.userInfo().objectForKey_(NSFileHandleNotificationDataItem);
+        if self.losslessMode != 0:
+            self._startOptimization_(data)
+            return
+
+        self.isDone = True
+        self.imageData = data
         if self.callbackWhenFinished is not None:
             self.callbackWhenFinished.update()
+
+    @objc.python_method
+    def _startOptimization_(self, data):
+        thread = threading.Thread(target=self._runOptimization_, args=(data,))
+        thread.daemon = True
+        thread.start()
+
+    @objc.python_method
+    def _runOptimization_(self, data):
+        optimized = self._optimizeData_(data)
+        if optimized is None:
+            optimized = data
+        self.performSelectorOnMainThread_withObject_waitUntilDone_(self._finishOptimization_, optimized, False)
+
+    def _finishOptimization_(self, data):
+        self.isDone = True
+        self.imageData = data
+        if self.callbackWhenFinished is not None:
+            self.callbackWhenFinished.update()
+
+    @objc.python_method
+    def _optimizeData_(self, data):
+        temp_dir = str(NSTemporaryDirectory())
+        base_name = "ImageAlpha-" + uuid.uuid4().hex
+        input_path = os.path.join(temp_dir, base_name + ".png")
+        output_path = os.path.join(temp_dir, base_name + "-zopf.png")
+        input_size = int(data.length()) if data is not None else 0
+
+        if not data.writeToFile_atomically_(input_path, True):
+            NSLog("Failed to write temp file for optimizers")
+            return None
+
+        optimized = None
+        try:
+            if self.losslessMode == 1:
+                if self._runOxipng_(input_path):
+                    optimized = NSData.dataWithContentsOfFile_(input_path)
+                    self._logOptimizeResult_("oxipng", input_size, optimized)
+                else:
+                    return None
+            elif self.losslessMode == 2:
+                if self._runZopflipng_(input_path, output_path):
+                    optimized = NSData.dataWithContentsOfFile_(output_path)
+                    self._logOptimizeResult_("zopflipng", input_size, optimized)
+                else:
+                    return None
+            if optimized is None:
+                optimized = NSData.dataWithContentsOfFile_(input_path)
+        finally:
+            for path in (input_path, output_path):
+                try:
+                    os.unlink(path)
+                except OSError:
+                    pass
+
+        return optimized
+
+    @objc.python_method
+    def _logOptimizeResult_(self, tool, input_size, optimized):
+        if optimized is None:
+            return
+        output_size = int(optimized.length())
+        NSLog("%s: %d -> %d bytes" % (tool, input_size, output_size))
+
+    @objc.python_method
+    def _runOxipng_(self, input_path):
+        exePath = self._findExecutable("oxipng")
+        if not exePath:
+            NSLog("Missing helper executable: oxipng")
+            return False
+
+        task = NSTask.alloc().init()
+        task.setLaunchPath_(exePath)
+        task.setArguments_(["-o", "4", "-q", input_path])
+        task.launch()
+        task.waitUntilExit()
+
+        if task.terminationStatus() != 0:
+            NSLog("oxipng failed with status %d" % task.terminationStatus())
+            return False
+
+        return True
+
+    @objc.python_method
+    def _runZopflipng_(self, input_path, output_path):
+        exePath = self._findExecutable("zopflipng")
+        if not exePath:
+            NSLog("Missing helper executable: zopflipng")
+            return False
+
+        task = NSTask.alloc().init()
+        task.setLaunchPath_(exePath)
+        task.setArguments_(["-y", input_path, output_path])
+        task.launch()
+        task.waitUntilExit()
+
+        if task.terminationStatus() != 0:
+            NSLog("zopflipng failed with status %d" % task.terminationStatus())
+            return False
+
+        return True
 
     # FIXME: use dealloc and super()?
     def destroy(self):

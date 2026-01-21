@@ -168,6 +168,8 @@ ImageAlpha.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Autoup
 ImageAlpha.app/Contents/Resources/ImageAlpha.icns
 ImageAlpha.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Autoupdate.app/Contents/Resources/AppIcon.icns
 ImageAlpha.app/Contents/MacOS/pngquant
+ImageAlpha.app/Contents/MacOS/oxipng
+ImageAlpha.app/Contents/MacOS/zopflipng
 ImageAlpha.app/Contents/Frameworks/Sparkle.framework/Versions/Current
 ImageAlpha.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/SUModelTranslation.plist
 ImageAlpha.app/Contents/Frameworks/Sparkle.framework/Versions/A/Resources/Info.plist

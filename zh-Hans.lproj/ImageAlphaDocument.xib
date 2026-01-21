@@ -41,7 +41,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <collectionView autoresizesSubviews="NO" wantsLayer="YES" focusRingType="none" selectable="YES" maxNumberOfRows="6" maxNumberOfColumns="4" id="1104" customClass="IACollectionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="205"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="244" height="160"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="primaryBackgroundColor" red="1" green="0.61539012000000004" blue="0.38556212000000001" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <connections>
@@ -138,10 +138,19 @@ IA
                                             <outlet property="nextKeyView" destination="1003" id="1177"/>
                                         </connections>
                                     </button>
-                                    <button toolTip="Forces nearly-opaque colors to be fully opaque. Makes most images degrade gracefully in IE6" id="1003">
-                                        <rect key="frame" x="18" y="261" width="203" height="18"/>
+                                    <textField focusRingType="none" verticalHuggingPriority="750" id="20010">
+                                        <rect key="frame" x="18" y="265" width="200" height="17"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <buttonCell key="cell" type="check" title="支持IE6半透明" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1004">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Lossless Compression" id="20011">
+                                            <font key="font" size="13" name=".PingFangSC-Semibold"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button toolTip="Run oxipng for additional lossless compression (fast)." id="1003">
+                                        <rect key="frame" x="18" y="245" width="203" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="oxipng (fast)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1004">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" size="13" name=".PingFangSC-Regular"/>
                                         </buttonCell>
@@ -152,13 +161,59 @@ IA
                                                     <string key="NSValueTransformerName">NSIsNotNil</string>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="-2" name="value" keyPath="documentImage.ieMode" id="1009">
+                                            <binding destination="-2" name="value" keyPath="documentImage.losslessOxipng" id="1009">
                                                 <dictionary key="options">
                                                     <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
                                                     <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
                                                 </dictionary>
                                             </binding>
-                                            <outlet property="nextKeyView" destination="1104" id="1178"/>
+                                            <outlet property="nextKeyView" destination="20001" id="1178"/>
+                                        </connections>
+                                    </button>
+                                    <button toolTip="Run zopflipng for maximum compression (very slow)." id="20001">
+                                        <rect key="frame" x="18" y="227" width="260" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="zopflipng (very slow)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="off" inset="2" id="20002">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="-2" name="enabled" keyPath="documentImage" id="20003">
+                                                <dictionary key="options">
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                </dictionary>
+                                            </binding>
+                                            <binding destination="-2" name="value" keyPath="documentImage.losslessZopfli" id="20004">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                            <outlet property="nextKeyView" destination="20006" id="20005"/>
+                                        </connections>
+                                    </button>
+                                    <button toolTip="Disable lossless compression." id="20006">
+                                        <rect key="frame" x="18" y="209" width="200" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="radio" title="none" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="off" inset="2" id="20007">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="-2" name="enabled" keyPath="documentImage" id="20008">
+                                                <dictionary key="options">
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                </dictionary>
+                                            </binding>
+                                            <binding destination="-2" name="value" keyPath="documentImage.losslessNone" id="20009">
+                                                <dictionary key="options">
+                                                    <bool key="NSAllowsEditingMultipleValuesSelection" value="NO"/>
+                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                </dictionary>
+                                            </binding>
+                                            <outlet property="nextKeyView" destination="1104" id="20012"/>
                                         </connections>
                                     </button>
                                     <slider verticalHuggingPriority="750" id="403">
@@ -297,9 +352,9 @@ IA
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="1166">
-                                        <rect key="frame" x="17" y="213" width="118" height="17"/>
+                                        <rect key="frame" x="17" y="175" width="170" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="背景" id="1167">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="预览背景" id="1167">
                                             <font key="font" size="13" name=".PingFangSC-Medium"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>

@@ -22,7 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		5A0A24C3174843D0003264CC /* pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D8D2A278C044808BD473D3F /* pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		305BB8F155CD4EA08143130C /* Tools/oxipng in CopyFiles */ = {isa = PBXBuildFile; fileRef = 910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		5A0A24C3174843D0003264CC /* Tools/pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D8D2A278C044808BD473D3F /* Tools/pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A1C388D1F2A3D0400E21DAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C38831F2A3CDB00E21DAC /* QuartzCore.framework */; };
 		5A2C9C61150EAFE600E9245E /* IAPatternBackgroundRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A2C9C60150EAFE600E9245E /* IAPatternBackgroundRenderer.m */; };
 		5A3010980F55DE1B0083C154 /* textures in Resources */ = {isa = PBXBuildFile; fileRef = 5A30108D0F55DE1B0083C154 /* textures */; };
@@ -46,6 +47,7 @@
 		779AE5FC0C0A0980000694DF /* ImageAlphaDocument.xib in Resources */ = {isa = PBXBuildFile; fileRef = 779AE5F90C0A0980000694DF /* ImageAlphaDocument.xib */; };
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
+		8D1C0E2F4B6A4A1B8E9F0C1D /* Tools/zopflipng in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,7 +78,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
-				5A0A24C3174843D0003264CC /* pngquant in CopyFiles */,
+				5A0A24C3174843D0003264CC /* Tools/pngquant in CopyFiles */,
+				305BB8F155CD4EA08143130C /* Tools/oxipng in CopyFiles */,
+				8D1C0E2F4B6A4A1B8E9F0C1D /* Tools/zopflipng in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +107,6 @@
 		5A6E7F90153C99F400D00506 /* IAColorBackgroundRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAColorBackgroundRenderer.h; sourceTree = "<group>"; };
 		5A6E7F91153C99F400D00506 /* IAColorBackgroundRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAColorBackgroundRenderer.m; sourceTree = "<group>"; };
 		5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = "<group>"; };
-		6D8D2A278C044808BD473D3F /* pngquant */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/pngquant; sourceTree = SOURCE_ROOT; };
 		5A8CE14A0F5B5CDD002ED669 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		5A91FE8A0E958375004954A0 /* IACollectionItem.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IACollectionItem.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		5A91FE8D0E95837F004954A0 /* IAImageView.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IAImageView.py; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.python; };
@@ -115,11 +118,14 @@
 		5AA71B4612FF268F002E5E77 /* ImageAlpha.tar.bz2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = ImageAlpha.tar.bz2; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA9BAB914268CED007E98AA /* Python.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Python.framework; path = Frameworks/Python.framework; sourceTree = SOURCE_ROOT; };
 		5AED10DC139BAC1400FF5C69 /* debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = debug.xcconfig; sourceTree = "<group>"; };
+		6D8D2A278C044808BD473D3F /* Tools/pngquant */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/pngquant; sourceTree = SOURCE_ROOT; };
 		77383F220C07AB8F0043B131 /* main.py */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.script.python; lineEnding = 0; path = main.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		779AE5F80C0A0980000694DF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		779AE5FA0C0A0980000694DF /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/ImageAlphaDocument.xib; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; plistStructureDefinitionIdentifier = "<none>"; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* ImageAlpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAlpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/zopflipng; sourceTree = SOURCE_ROOT; };
+		910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/oxipng; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,7 +177,9 @@
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				5AED10DC139BAC1400FF5C69 /* debug.xcconfig */,
 				5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */,
-				6D8D2A278C044808BD473D3F /* pngquant */,
+				6D8D2A278C044808BD473D3F /* Tools/pngquant */,
+				910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */,
+				8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
@@ -264,6 +272,7 @@
 				5AF2D49C1AED3A9200E761BA /* CopyFiles */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				5A8CE1460F5B5BD5002ED669 /* Copy Frameworks */,
+				7F9C6B2E4C1A4D5B9E4A1C3D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -309,9 +318,6 @@
 		};
 /* End PBXProject section */
 
-/* Begin PBXReferenceProxy section */
-/* End PBXReferenceProxy section */
-
 /* Begin PBXResourcesBuildPhase section */
 		8D15AC2B0486D014006FF6A4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -351,6 +357,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "find \"$TARGET_BUILD_DIR\" '(' -name '*.pyc' -or -name '*.cstemp' ')' -delete\ncd \"$BUILT_PRODUCTS_DIR/\" && tar cjf \"$TARGET_BUILD_DIR/ImageAlpha.tar.bz2\" \"ImageAlpha.app\"\n";
+		};
+		7F9C6B2E4C1A4D5B9E4A1C3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"$ENABLE_HARDENED_RUNTIME\" != \"YES\" ]; then\n  exit 0\nfi\nif [ \"$CODE_SIGNING_ALLOWED\" != \"YES\" ]; then\n  exit 0\nfi\nif [ -z \"$EXPANDED_CODE_SIGN_IDENTITY\" ] || [ \"$CODE_SIGN_IDENTITY\" = \"-\" ]; then\n  exit 0\nfi\n\nAPP=\"$TARGET_BUILD_DIR/$WRAPPER_NAME\"\nif [ ! -d \"$APP\" ]; then\n  exit 0\nfi\n\nsign_one() {\n  local path=\"$1\"\n  if [ -e \"$path\" ]; then\n    /usr/bin/codesign --force --options runtime --timestamp --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" \"$path\"\n  fi\n}\n\nsign_deep() {\n  local path=\"$1\"\n  if [ -e \"$path\" ]; then\n    /usr/bin/codesign --force --options runtime --timestamp --sign \"$EXPANDED_CODE_SIGN_IDENTITY\" --deep \"$path\"\n  fi\n}\n\nFRAMEWORK=\"$APP/Contents/Frameworks/Python.framework\"\nCURRENT_LINK=\"$FRAMEWORK/Versions/Current\"\nPY_VER=\"$CURRENT_LINK\"\nif [ -L \"$CURRENT_LINK\" ]; then\n  LINK_TARGET=\"$(readlink \"$CURRENT_LINK\")\"\n  if [ -n \"$LINK_TARGET\" ]; then\n    PY_VER=\"$FRAMEWORK/Versions/$LINK_TARGET\"\n  fi\nfi\n\nPY_APP=\"$CURRENT_LINK/Resources/Python.app\"\nPY_APP_BIN=\"$PY_APP/Contents/MacOS/Python\"\nPY_APP_VER=\"$PY_VER/Resources/Python.app\"\nPY_APP_VER_BIN=\"$PY_APP_VER/Contents/MacOS/Python\"\nPY_BIN=\"$CURRENT_LINK/bin/python3.13\"\nPY_BIN_VER=\"$PY_VER/bin/python3.13\"\nPY_FRAMEWORK_BIN=\"$CURRENT_LINK/Python\"\nPY_FRAMEWORK_BIN_VER=\"$PY_VER/Python\"\n\nsign_one \"$PY_BIN\"\nsign_one \"$PY_BIN_VER\"\nsign_one \"$PY_APP_BIN\"\nsign_one \"$PY_APP_VER_BIN\"\nsign_one \"$PY_FRAMEWORK_BIN\"\nsign_one \"$PY_FRAMEWORK_BIN_VER\"\n\nsign_deep \"$PY_APP\"\nsign_deep \"$PY_APP_VER\"\nsign_deep \"$FRAMEWORK\"\n\nsign_one \"$APP/Contents/MacOS/pngquant\"\nsign_one \"$APP/Contents/MacOS/oxipng\"\nsign_one \"$APP/Contents/MacOS/zopflipng\"\nsign_deep \"$APP\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -403,6 +423,8 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = ImageAlpha;
 			};
@@ -413,6 +435,8 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				PRODUCT_NAME = ImageAlpha;
 			};
@@ -421,12 +445,21 @@
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				ENABLE_HARDENED_RUNTIME = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -437,11 +470,20 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ImageAlpha_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImageAlpha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlpha;
 				PRODUCT_NAME = ImageAlpha;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -449,11 +491,20 @@
 		C05733C908A9546B00998B17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_ENABLE_OBJC_WEAK = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -462,11 +513,20 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ImageAlpha_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ImageAlpha;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlpha;
 				PRODUCT_NAME = ImageAlpha;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -495,9 +555,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -532,8 +593,9 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_FAST_MATH = YES;
 				GCC_INLINES_ARE_PRIVATE_EXTERN = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -560,6 +622,7 @@
 				GCC_WARN_UNUSED_PARAMETER = NO;
 				GCC_WARN_UNUSED_VALUE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Release;

@@ -17,6 +17,8 @@
 			<string>PNG Image</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
 			<key>LSItemContentTypes</key>
 			<array>
 				<string>public.png</string>
@@ -40,7 +42,9 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2</string>
 	<key>CFBundleVersion</key>
-	<string>1.5.1</string>
+	<string>2.0.0</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.graphics-design</string>
 	<key>LSArchitecturePriority</key>
 	<array>
 		<string>x86_64</string>

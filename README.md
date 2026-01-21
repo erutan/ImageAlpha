@@ -1,6 +1,6 @@
 # ImageAlpha
 
-ImageAlpha is a Mac OS X GUI for [pngquant](http://pngquant.org). This tool reduces filesize of PNG files while preserving the alpha channel.
+ImageAlpha is a Mac OS X GUI for [pngquant](http://pngquant.org), with optional lossless optimization via [oxipng](https://github.com/oxipng/oxipng) and extra (very slow) compression via [zopflipng](https://github.com/google/zopfli).
 
 ImageAlpha is written in Python and Cocoa (PyObjC).
 
