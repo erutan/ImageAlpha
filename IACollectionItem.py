@@ -139,8 +139,10 @@ class IACollectionView(NSCollectionView):
         self.image = img
         if img is not None:
             size = img.size()
-            self.setMaxItemSize_((max(100,size.width*2),max(100,size.height*2)))
-            self.setMinItemSize_((40,40))
+            # Use square dimensions for preview background items
+            maxDim = max(60, min(size.width, size.height))
+            self.setMaxItemSize_((maxDim, maxDim))
+            self.setMinItemSize_((40, 40))
 
         self.sendNotification_(u"ImageChanged");
         pass

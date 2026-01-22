@@ -40,9 +40,9 @@
                                 <rect key="frame" x="0.0" y="0.0" width="244" height="483"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <collectionView autoresizesSubviews="NO" wantsLayer="YES" focusRingType="none" selectable="YES" maxNumberOfRows="6" maxNumberOfColumns="4" id="1104" customClass="IACollectionView">
-                                        <rect key="frame" x="0.0" y="0.0" width="244" height="160"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <collectionView autoresizesSubviews="NO" wantsLayer="YES" focusRingType="none" selectable="YES" maxNumberOfRows="3" maxNumberOfColumns="4" id="1104" customClass="IACollectionView">
+                                        <rect key="frame" x="0.0" y="5" width="244" height="153"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="primaryBackgroundColor" red="1" green="0.61539012000000004" blue="0.38556212000000001" alpha="0.0" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <binding destination="-2" name="hidden" keyPath="documentImage" id="1125">
@@ -139,16 +139,16 @@ IA
                                         </connections>
                                     </button>
                                     <textField focusRingType="none" verticalHuggingPriority="750" id="20010">
-                                        <rect key="frame" x="18" y="265" width="200" height="17"/>
+                                        <rect key="frame" x="18" y="257" width="200" height="20"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Lossless Compression" id="20011">
-                                            <font key="font" size="13" name=".PingFangSC-Semibold"/>
+                                            <font key="font" size="14" name=".PingFangSC-Semibold"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <button toolTip="Run oxipng for additional lossless compression (fast)." id="1003">
-                                        <rect key="frame" x="18" y="245" width="203" height="18"/>
+                                        <rect key="frame" x="18" y="237" width="203" height="18"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="radio" title="oxipng (fast)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="1004">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -171,7 +171,7 @@ IA
                                         </connections>
                                     </button>
                                     <button toolTip="Run zopflipng for maximum compression (very slow)." id="20001">
-                                        <rect key="frame" x="18" y="227" width="260" height="18"/>
+                                        <rect key="frame" x="18" y="219" width="260" height="18"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="radio" title="zopflipng (very slow)" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="off" inset="2" id="20002">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -194,7 +194,7 @@ IA
                                         </connections>
                                     </button>
                                     <button toolTip="Disable lossless compression." id="20006">
-                                        <rect key="frame" x="18" y="209" width="200" height="18"/>
+                                        <rect key="frame" x="18" y="201" width="200" height="18"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="radio" title="none" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="off" inset="2" id="20007">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
@@ -352,10 +352,10 @@ IA
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="1166">
-                                        <rect key="frame" x="17" y="175" width="170" height="17"/>
+                                        <rect key="frame" x="17" y="163" width="170" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="预览背景" id="1167">
-                                            <font key="font" size="13" name=".PingFangSC-Medium"/>
+                                            <font key="font" size="14" name=".PingFangSC-Semibold"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
