@@ -13,7 +13,9 @@
       "Bash(chmod:*)",
       "Bash(lipo:*)",
       "Bash(/tmp/zopfli/zopflipng-universal:*)",
-      "Bash(security find-identity:*)"
+      "Bash(security find-identity:*)",
+      "Bash(python3:*)",
+      "Bash(./Frameworks/Python.framework/Versions/3.13/bin/python3:*)"
     ]
   }
 }
