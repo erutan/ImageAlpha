@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		1A2B3C4D5E6F7A8B9C0D1E2F /* IAPreferencesController.py in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7A8B9C0D1E30 /* IAPreferencesController.py */; };
+		1A2B3C4D5E6F7A8B9C0D1E31 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7A8B9C0D1E32 /* Preferences.xib */; };
 		305BB8F155CD4EA08143130C /* Tools/oxipng in CopyFiles */ = {isa = PBXBuildFile; fileRef = 910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A0A24C3174843D0003264CC /* Tools/pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D8D2A278C044808BD473D3F /* Tools/pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A1C388D1F2A3D0400E21DAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C38831F2A3CDB00E21DAC /* QuartzCore.framework */; };
@@ -88,6 +90,8 @@
 
 /* Begin PBXFileReference section */
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		1A2B3C4D5E6F7A8B9C0D1E30 /* IAPreferencesController.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = IAPreferencesController.py; sourceTree = "<group>"; };
+		1A2B3C4D5E6F7A8B9C0D1E33 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		13E42FBA07B3F13500E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -197,6 +201,7 @@
 				5A91FF230E958EE6004954A0 /* ImageAlphaDocument.py */,
 				5A3F4E5F17A1F3FE00469537 /* ImageAlphaDocumentC.h */,
 				5A3F4E6017A1F3FE00469537 /* ImageAlphaDocumentC.m */,
+				1A2B3C4D5E6F7A8B9C0D1E30 /* IAPreferencesController.py */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 				779AE5F90C0A0980000694DF /* ImageAlphaDocument.xib */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
 				779AE5F70C0A0980000694DF /* MainMenu.xib */,
+				1A2B3C4D5E6F7A8B9C0D1E32 /* Preferences.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -329,12 +335,14 @@
 				5AA5327E0EE32FC700360305 /* IAImage.py in Resources */,
 				5A91FE940E95837F004954A0 /* IAImageView.py in Resources */,
 				5A91FE950E95837F004954A0 /* IAImageViewInteractive.py in Resources */,
+				1A2B3C4D5E6F7A8B9C0D1E2F /* IAPreferencesController.py in Resources */,
 				5A91FE990E95837F004954A0 /* IASlider.py in Resources */,
 				5A6B42DD0E96E50100ACA396 /* ImageAlpha.icns in Resources */,
 				5A91FF240E958EE6004954A0 /* ImageAlphaDocument.py in Resources */,
 				779AE5FC0C0A0980000694DF /* ImageAlphaDocument.xib in Resources */,
 				77383F230C07AB8F0043B131 /* main.py in Resources */,
 				779AE5FB0C0A0980000694DF /* MainMenu.xib in Resources */,
+				1A2B3C4D5E6F7A8B9C0D1E31 /* Preferences.xib in Resources */,
 				5A3010980F55DE1B0083C154 /* textures in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +421,14 @@
 				779AE5FA0C0A0980000694DF /* English */,
 			);
 			name = ImageAlphaDocument.xib;
+			sourceTree = "<group>";
+		};
+		1A2B3C4D5E6F7A8B9C0D1E32 /* Preferences.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1A2B3C4D5E6F7A8B9C0D1E33 /* English */,
+			);
+			name = Preferences.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

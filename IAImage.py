@@ -102,7 +102,16 @@ class IAImage(NSObject):
         self = super(IAImage, self).init()
         self.versions = {};
         self.updateDithering()
+        self.updateLosslessMode()
         return self
+
+    def updateLosslessMode(self):
+        """Set initial lossless mode from user defaults."""
+        defaults = NSUserDefaults.standardUserDefaults()
+        mode = defaults.integerForKey_("defaultLosslessMode")
+        # 0=none, 1=oxipng, 2=zopflipng
+        if mode in (0, 1, 2):
+            self._losslessMode = mode
 
     def setCallbackWhenImageChanges_(self, documentToCallback):
         self.callbackWhenImageChanges = documentToCallback;
@@ -200,6 +209,10 @@ class IAImage(NSObject):
 
     def setNumberOfColors_(self,num):
         self._numberOfColors = int(num)
+        # Save color count if "remember" setting is enabled
+        defaults = NSUserDefaults.standardUserDefaults()
+        if defaults.boolForKey_("rememberColorCount"):
+            defaults.setInteger_forKey_(self._numberOfColors, "lastColorCount")
         self.update()
 
     def quantizationMethod(self):
@@ -412,15 +425,68 @@ class IAImageVersion(NSObject):
         NSLog("%s: %d -> %d bytes" % (tool, input_size, output_size))
 
     @objc.python_method
+    def _getOxipngArguments_(self, input_path):
+        """Build oxipng arguments from NSUserDefaults settings."""
+        defaults = NSUserDefaults.standardUserDefaults()
+        args = []
+
+        # Optimization level
+        if defaults.boolForKey_("oxipng.maxOptimization"):
+            args.extend(["-o", "max"])
+        else:
+            level = defaults.integerForKey_("oxipng.optimizationLevel")
+            args.extend(["-o", str(level)])
+
+        # Strip metadata
+        strip_mode = defaults.integerForKey_("oxipng.stripMetadata")
+        if strip_mode == 0:
+            pass  # none - don't strip
+        elif strip_mode == 1:
+            args.append("--strip=safe")
+        elif strip_mode == 2:
+            args.append("--strip=all")
+
+        # Alpha optimization
+        if defaults.boolForKey_("oxipng.alphaOptimization"):
+            args.append("--alpha")
+
+        # Interlacing
+        interlace = defaults.integerForKey_("oxipng.interlace")
+        if interlace == 1:
+            args.extend(["-i", "1"])  # on
+        elif interlace == 2:
+            args.extend(["-i", "0"])  # off
+        # 0 = keep (don't specify)
+
+        # Threads
+        threads = defaults.integerForKey_("oxipng.threads")
+        if threads > 0:
+            args.extend(["--threads", str(threads)])
+
+        # Timeout
+        timeout = defaults.integerForKey_("oxipng.timeout")
+        if timeout > 0:
+            args.extend(["--timeout", str(timeout)])
+
+        # Quiet mode and input file
+        args.append("-q")
+        args.append(input_path)
+
+        return args
+
+    @objc.python_method
     def _runOxipng_(self, input_path):
         exePath = self._findExecutable("oxipng")
         if not exePath:
             NSLog("Missing helper executable: oxipng")
             return False
 
+        args = self._getOxipngArguments_(input_path)
+        NSLog("oxipng args: %s" % " ".join(args))
+
         task = NSTask.alloc().init()
         task.setLaunchPath_(exePath)
-        task.setArguments_(["-o", "4", "-q", input_path])
+        task.setArguments_(args)
         task.launch()
         task.waitUntilExit()
 
@@ -431,15 +497,52 @@ class IAImageVersion(NSObject):
         return True
 
     @objc.python_method
+    def _getZopflipngArguments_(self, input_path, output_path):
+        """Build zopflipng arguments from NSUserDefaults settings."""
+        defaults = NSUserDefaults.standardUserDefaults()
+        args = ["-y"]  # Always overwrite output
+
+        # Iterations
+        iterations = defaults.integerForKey_("zopflipng.iterations")
+        if iterations > 0:
+            args.extend(["--iterations=%d" % iterations])
+
+        # Maximum compression
+        if defaults.boolForKey_("zopflipng.maxCompression"):
+            args.append("-m")
+
+        # Quick mode
+        if defaults.boolForKey_("zopflipng.quickMode"):
+            args.append("-q")
+
+        # Keep chunks
+        keep_chunks = defaults.stringForKey_("zopflipng.keepChunks")
+        if keep_chunks and len(keep_chunks.strip()) > 0:
+            # Split by comma and add each chunk
+            for chunk in str(keep_chunks).split(","):
+                chunk = chunk.strip()
+                if chunk:
+                    args.extend(["--keepchunks=%s" % chunk])
+
+        # Input and output files
+        args.append(input_path)
+        args.append(output_path)
+
+        return args
+
+    @objc.python_method
     def _runZopflipng_(self, input_path, output_path):
         exePath = self._findExecutable("zopflipng")
         if not exePath:
             NSLog("Missing helper executable: zopflipng")
             return False
 
+        args = self._getZopflipngArguments_(input_path, output_path)
+        NSLog("zopflipng args: %s" % " ".join(args))
+
         task = NSTask.alloc().init()
         task.setLaunchPath_(exePath)
-        task.setArguments_(["-y", input_path, output_path])
+        task.setArguments_(args)
         task.launch()
         task.waitUntilExit()
 

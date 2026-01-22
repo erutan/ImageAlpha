@@ -21,6 +21,7 @@ import IAImageViewInteractive
 import IABackgroundRenderer
 import IAImageView
 import IAImage
+import IAPreferencesController
 
 # pass control to AppKit
 AppHelper.runEventLoop()

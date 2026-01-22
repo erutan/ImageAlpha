@@ -189,6 +189,13 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 		docimg.setCallbackWhenImageChanges_(self);
 		self.setDisplayImage_(docimg.image());
 
+		# Restore remembered color count if enabled
+		defaults = NSUserDefaults.standardUserDefaults()
+		if defaults.boolForKey_("rememberColorCount"):
+			lastCount = defaults.integerForKey_("lastColorCount")
+			if lastCount >= 2 and lastCount <= 256:
+				docimg.setNumberOfColors_(lastCount)
+
 		self.updateZoomedImageViewAlternateImage(zoomToFill=True)
 
 	def setDisplayImage_(self,image):
