@@ -24,6 +24,7 @@
 /* Begin PBXBuildFile section */
 		1A2B3C4D5E6F7A8B9C0D1E2F /* IAPreferencesController.py in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7A8B9C0D1E30 /* IAPreferencesController.py */; };
 		1A2B3C4D5E6F7A8B9C0D1E31 /* Preferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7A8B9C0D1E32 /* Preferences.xib */; };
+		AABBCCDD00112233 /* CompressionSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBCCDD00112234 /* CompressionSettingsTests.swift */; };
 		305BB8F155CD4EA08143130C /* Tools/oxipng in CopyFiles */ = {isa = PBXBuildFile; fileRef = 910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A0A24C3174843D0003264CC /* Tools/pngquant in CopyFiles */ = {isa = PBXBuildFile; fileRef = 6D8D2A278C044808BD473D3F /* Tools/pngquant */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		5A1C388D1F2A3D0400E21DAC /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C38831F2A3CDB00E21DAC /* QuartzCore.framework */; };
@@ -54,6 +55,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		5A8CE1950F5B5E23002ED669 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4;
+			remoteInfo = ImageAlpha;
+		};
+		AABBCCDD00112235 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
 			proxyType = 1;
@@ -130,6 +138,8 @@
 		8D15AC370486D014006FF6A4 /* ImageAlpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAlpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/zopflipng; sourceTree = SOURCE_ROOT; };
 		910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/oxipng; sourceTree = SOURCE_ROOT; };
+		AABBCCDD00112234 /* CompressionSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionSettingsTests.swift; sourceTree = "<group>"; };
+		AABBCCDD00112236 /* ImageAlphaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageAlphaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +150,13 @@
 				8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */,
 				5AA9BABA14268CED007E98AA /* Python.framework in Frameworks */,
 				5A1C388D1F2A3D0400E21DAC /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AABBCCDD0011223A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,8 +187,17 @@
 			children = (
 				8D15AC370486D014006FF6A4 /* ImageAlpha.app */,
 				5AA71B4612FF268F002E5E77 /* ImageAlpha.tar.bz2 */,
+				AABBCCDD00112236 /* ImageAlphaTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AABBCCDD00112237 /* ImageAlphaTests */ = {
+			isa = PBXGroup;
+			children = (
+				AABBCCDD00112234 /* CompressionSettingsTests.swift */,
+			);
+			path = ImageAlphaTests;
 			sourceTree = "<group>";
 		};
 		2A37F4AAFDCFA73011CA2CEA /* ImageAlpha */ = {
@@ -187,6 +213,7 @@
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,
+				AABBCCDD00112237 /* ImageAlphaTests */,
 			);
 			name = ImageAlpha;
 			sourceTree = "<group>";
@@ -290,6 +317,23 @@
 			productReference = 8D15AC370486D014006FF6A4 /* ImageAlpha.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AABBCCDD00112238 /* ImageAlphaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AABBCCDD0011223D /* Build configuration list for PBXNativeTarget "ImageAlphaTests" */;
+			buildPhases = (
+				AABBCCDD00112239 /* Sources */,
+				AABBCCDD0011223A /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AABBCCDD0011223B /* PBXTargetDependency */,
+			);
+			name = ImageAlphaTests;
+			productName = ImageAlphaTests;
+			productReference = AABBCCDD00112236 /* ImageAlphaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -301,6 +345,10 @@
 				TargetAttributes = {
 					8D15AC270486D014006FF6A4 = {
 						ProvisioningStyle = Manual;
+					};
+					AABBCCDD00112238 = {
+						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 8D15AC270486D014006FF6A4;
 					};
 				};
 			};
@@ -320,6 +368,7 @@
 			targets = (
 				8D15AC270486D014006FF6A4 /* ImageAlpha */,
 				5A8CE1920F5B5E1D002ED669 /* Archive */,
+				AABBCCDD00112238 /* ImageAlphaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -378,7 +427,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\nset -euo pipefail\n\necho \"=== Code Signing Script ===\"\necho \"ENABLE_HARDENED_RUNTIME: $ENABLE_HARDENED_RUNTIME\"\necho \"CODE_SIGNING_ALLOWED: ${CODE_SIGNING_ALLOWED:-unset}\"\necho \"CODE_SIGN_IDENTITY: $CODE_SIGN_IDENTITY\"\necho \"EXPANDED_CODE_SIGN_IDENTITY: ${EXPANDED_CODE_SIGN_IDENTITY:-unset}\"\n\nif [ \"$ENABLE_HARDENED_RUNTIME\" != \"YES\" ]; then\n  echo \"Hardened runtime not enabled, skipping\"\n  exit 0\nfi\nif [ \"${CODE_SIGNING_ALLOWED:-}\" != \"YES\" ]; then\n  echo \"Code signing not allowed, skipping\"\n  exit 0\nfi\nif [ -z \"${EXPANDED_CODE_SIGN_IDENTITY:-}\" ] || [ \"$CODE_SIGN_IDENTITY\" = \"-\" ]; then\n  echo \"No signing identity, skipping\"\n  exit 0\nfi\n\nAPP=\"$TARGET_BUILD_DIR/$WRAPPER_NAME\"\necho \"APP: $APP\"\nif [ ! -d \"$APP\" ]; then\n  echo \"App bundle not found, skipping\"\n  exit 0\nfi\n\nIDENTITY=\"$EXPANDED_CODE_SIGN_IDENTITY\"\necho \"Signing with identity: $IDENTITY\"\n\nsign_item() {\n  echo \"  Signing: $1\"\n  /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" \"$1\" 2>&1 || echo \"    WARNING: Failed to sign $1\"\n}\n\nPYFRAMEWORK=\"$APP/Contents/Frameworks/Python.framework\"\nPYVER=\"$PYFRAMEWORK/Versions/3.13\"\n\necho \"Python framework: $PYFRAMEWORK\"\necho \"Python version dir: $PYVER\"\n\n# Sign all signable files using find -exec (avoids xargs command line length issues)\necho \"Signing .so files...\"\nfind \"$PYVER/lib\" -type f -name '*.so' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\necho \"Signing .dylib files...\"\nfind \"$PYVER/lib\" -type f -name '*.dylib' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\necho \"Signing .o files...\"\nfind \"$PYVER/lib\" -type f -name '*.o' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\necho \"Signing .a files...\"\nfind \"$PYVER\" -type f -name '*.a' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\n# Sign nested Tcl framework\nTCL=\"$PYVER/Frameworks/Tcl.framework\"\nif [ -d \"$TCL\" ]; then\n  echo \"Signing Tcl.framework...\"\n  find \"$TCL\" -type f -name '*.a' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n  [ -f \"$TCL/Versions/8.6/Tcl\" ] && sign_item \"$TCL/Versions/8.6/Tcl\"\n  sign_item \"$TCL\"\nfi\n\n# Sign nested Tk framework\nTK=\"$PYVER/Frameworks/Tk.framework\"\nif [ -d \"$TK\" ]; then\n  echo \"Signing Tk.framework...\"\n  find \"$TK\" -type f -name '*.a' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n  [ -f \"$TK/Versions/8.6/Tk\" ] && sign_item \"$TK/Versions/8.6/Tk\"\n  sign_item \"$TK\"\nfi\n\n# Sign Python binaries\necho \"Signing Python binaries...\"\n[ -f \"$PYVER/bin/python3.13\" ] && sign_item \"$PYVER/bin/python3.13\"\n[ -f \"$PYVER/bin/python3.13-intel64\" ] && sign_item \"$PYVER/bin/python3.13-intel64\"\n\n# Sign Python.app\nPYAPP=\"$PYVER/Resources/Python.app\"\nif [ -d \"$PYAPP\" ]; then\n  echo \"Signing Python.app...\"\n  [ -f \"$PYAPP/Contents/MacOS/Python\" ] && sign_item \"$PYAPP/Contents/MacOS/Python\"\n  sign_item \"$PYAPP\"\nfi\n\n# Sign main Python framework binary\necho \"Signing main Python binary...\"\n[ -f \"$PYVER/Python\" ] && sign_item \"$PYVER/Python\"\n\n# Sign the Python framework itself\necho \"Signing Python.framework...\"\nsign_item \"$PYFRAMEWORK\"\n\n# Sign CLI tools\necho \"Signing CLI tools...\"\n[ -f \"$APP/Contents/MacOS/pngquant\" ] && sign_item \"$APP/Contents/MacOS/pngquant\"\n[ -f \"$APP/Contents/MacOS/oxipng\" ] && sign_item \"$APP/Contents/MacOS/oxipng\"\n[ -f \"$APP/Contents/MacOS/zopflipng\" ] && sign_item \"$APP/Contents/MacOS/zopflipng\"\n\n# Sign the main app last\necho \"Signing main app bundle...\"\nsign_item \"$APP\"\n\necho \"=== Code Signing Complete ===\"\n";
+			shellScript = "#!/bin/bash\nset -euo pipefail\n\necho \"=== Code Signing Script ===\"\necho \"ENABLE_HARDENED_RUNTIME: $ENABLE_HARDENED_RUNTIME\"\necho \"CODE_SIGNING_ALLOWED: ${CODE_SIGNING_ALLOWED:-unset}\"\necho \"CODE_SIGN_IDENTITY: $CODE_SIGN_IDENTITY\"\necho \"EXPANDED_CODE_SIGN_IDENTITY: ${EXPANDED_CODE_SIGN_IDENTITY:-unset}\"\n\nif [ \"$ENABLE_HARDENED_RUNTIME\" != \"YES\" ]; then\n  echo \"Hardened runtime not enabled, skipping\"\n  exit 0\nfi\nif [ \"${CODE_SIGNING_ALLOWED:-}\" != \"YES\" ]; then\n  echo \"Code signing not allowed, skipping\"\n  exit 0\nfi\nif [ -z \"${EXPANDED_CODE_SIGN_IDENTITY:-}\" ] || [ \"$CODE_SIGN_IDENTITY\" = \"-\" ]; then\n  echo \"No signing identity, skipping\"\n  exit 0\nfi\n\nAPP=\"$TARGET_BUILD_DIR/$WRAPPER_NAME\"\necho \"APP: $APP\"\nif [ ! -d \"$APP\" ]; then\n  echo \"App bundle not found, skipping\"\n  exit 0\nfi\n\nIDENTITY=\"$EXPANDED_CODE_SIGN_IDENTITY\"\necho \"Signing with identity: $IDENTITY\"\n\nsign_binary() {\n  echo \"  Signing: $1\"\n  /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" \"$1\" 2>&1 || echo \"    WARNING: Failed to sign $1\"\n}\n\nPYFRAMEWORK=\"$APP/Contents/Frameworks/Python.framework\"\nPYVER=\"$PYFRAMEWORK/Versions/3.13\"\n\necho \"Python framework: $PYFRAMEWORK\"\necho \"Python version dir: $PYVER\"\n\n# Sign all nested Mach-O binaries (not bundles - Xcode will sign those with --deep)\n# These are files Xcode doesn't know about that need hardened runtime\n\necho \"Signing .so files...\"\nfind \"$PYVER/lib\" -type f -name '*.so' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\necho \"Signing .dylib files...\"\nfind \"$PYVER/lib\" -type f -name '*.dylib' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\n# Sign .o files (required for notarization)\necho \"Signing .o files...\"\nfind \"$PYVER/lib\" -type f -name '*.o' -exec /usr/bin/codesign --force --options runtime --timestamp --sign \"$IDENTITY\" {} \\; 2>&1 || true\n\n# Sign Tcl binary\nTCL=\"$PYVER/Frameworks/Tcl.framework\"\nif [ -d \"$TCL\" ]; then\n  echo \"Signing Tcl binary...\"\n  [ -f \"$TCL/Versions/8.6/Tcl\" ] && sign_binary \"$TCL/Versions/8.6/Tcl\"\nfi\n\n# Sign Tk binary\nTK=\"$PYVER/Frameworks/Tk.framework\"\nif [ -d \"$TK\" ]; then\n  echo \"Signing Tk binary...\"\n  [ -f \"$TK/Versions/8.6/Tk\" ] && sign_binary \"$TK/Versions/8.6/Tk\"\nfi\n\n# Sign Python binaries - REQUIRED for hardened runtime\necho \"Signing Python binaries...\"\n[ -f \"$PYVER/bin/python3.13\" ] && sign_binary \"$PYVER/bin/python3.13\"\n[ -f \"$PYVER/bin/python3.13-intel64\" ] && sign_binary \"$PYVER/bin/python3.13-intel64\"\n[ -f \"$PYVER/Python\" ] && sign_binary \"$PYVER/Python\"\n\n# Sign Python.app executable - REQUIRED for hardened runtime\nPYAPP=\"$PYVER/Resources/Python.app\"\nif [ -d \"$PYAPP\" ]; then\n  echo \"Signing Python.app executable...\"\n  [ -f \"$PYAPP/Contents/MacOS/Python\" ] && sign_binary \"$PYAPP/Contents/MacOS/Python\"\nfi\n\n# Sign CLI tools that are embedded\necho \"Signing CLI tools...\"\n[ -f \"$APP/Contents/MacOS/pngquant\" ] && sign_binary \"$APP/Contents/MacOS/pngquant\"\n[ -f \"$APP/Contents/MacOS/oxipng\" ] && sign_binary \"$APP/Contents/MacOS/oxipng\"\n[ -f \"$APP/Contents/MacOS/zopflipng\" ] && sign_binary \"$APP/Contents/MacOS/zopflipng\"\n\necho \"=== Code Signing of executables complete ===\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -396,6 +445,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AABBCCDD00112239 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AABBCCDD00112233 /* CompressionSettingsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -403,6 +460,11 @@
 			isa = PBXTargetDependency;
 			target = 8D15AC270486D014006FF6A4 /* ImageAlpha */;
 			targetProxy = 5A8CE1950F5B5E23002ED669 /* PBXContainerItemProxy */;
+		};
+		AABBCCDD0011223B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* ImageAlpha */;
+			targetProxy = AABBCCDD00112235 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -515,6 +577,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = PJ3XQB8KYK;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				OTHER_CODE_SIGN_FLAGS = "--deep --timestamp";
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
 				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
 				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
@@ -644,6 +708,38 @@
 			};
 			name = Release;
 		};
+		AABBCCDD0011223E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlphaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAlpha.app/Contents/MacOS/ImageAlpha";
+			};
+			name = Debug;
+		};
+		AABBCCDD0011223F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = PJ3XQB8KYK;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlphaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ImageAlpha.app/Contents/MacOS/ImageAlpha";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -670,6 +766,15 @@
 			buildConfigurations = (
 				C05733CC08A9546B00998B17 /* Debug */,
 				C05733CD08A9546B00998B17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AABBCCDD0011223D /* Build configuration list for PBXNativeTarget "ImageAlphaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AABBCCDD0011223E /* Debug */,
+				AABBCCDD0011223F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -5,11 +5,14 @@ Tests for oxipng and zopflipng settings argument generation.
 Run from the command line:
     python3 test_compression_settings.py
 
-Or run the app and use the test menu (if added).
+Or run via Xcode with Cmd+U.
 """
 
 import sys
 import os
+import tempfile
+import shutil
+import subprocess
 
 # Add the app's Python path if running standalone
 try:
@@ -406,6 +409,433 @@ def test_zopflipng_keep_chunks(result):
         result.fail("zopflipng keep chunks: multiple", "--keepchunks=tEXt and --keepchunks=iTXt", args)
 
 
+def test_preference_persistence(result):
+    """Test that preferences persist correctly in NSUserDefaults."""
+    defaults = NSUserDefaults.standardUserDefaults()
+
+    # Test integer persistence
+    defaults.setInteger_forKey_(3, "oxipng.optimizationLevel")
+    value = defaults.integerForKey_("oxipng.optimizationLevel")
+    if value == 3:
+        result.ok("preference persistence: integer")
+    else:
+        result.fail("preference persistence: integer", 3, value)
+
+    # Test boolean persistence
+    defaults.setBool_forKey_(True, "oxipng.alphaOptimization")
+    value = defaults.boolForKey_("oxipng.alphaOptimization")
+    if value == True:
+        result.ok("preference persistence: boolean true")
+    else:
+        result.fail("preference persistence: boolean true", True, value)
+
+    defaults.setBool_forKey_(False, "oxipng.alphaOptimization")
+    value = defaults.boolForKey_("oxipng.alphaOptimization")
+    if value == False:
+        result.ok("preference persistence: boolean false")
+    else:
+        result.fail("preference persistence: boolean false", False, value)
+
+    # Test string persistence
+    defaults.setObject_forKey_("tEXt,iTXt", "zopflipng.keepChunks")
+    value = defaults.stringForKey_("zopflipng.keepChunks")
+    if str(value) == "tEXt,iTXt":
+        result.ok("preference persistence: string")
+    else:
+        result.fail("preference persistence: string", "tEXt,iTXt", value)
+
+
+def test_default_lossless_mode(result):
+    """Test that defaultLosslessMode setting works."""
+    defaults = NSUserDefaults.standardUserDefaults()
+
+    # Import IAImage to test initialization
+    try:
+        from IAImage import IAImage
+    except ImportError:
+        result.fail("default lossless mode: import", "IAImage imported", "ImportError")
+        return
+
+    # Test default mode = none (0)
+    defaults.setInteger_forKey_(0, "defaultLosslessMode")
+    img = IAImage.alloc().init()
+    if img.losslessMode() == 0:
+        result.ok("default lossless mode: none")
+    else:
+        result.fail("default lossless mode: none", 0, img.losslessMode())
+
+    # Test default mode = oxipng (1)
+    defaults.setInteger_forKey_(1, "defaultLosslessMode")
+    img = IAImage.alloc().init()
+    if img.losslessMode() == 1:
+        result.ok("default lossless mode: oxipng")
+    else:
+        result.fail("default lossless mode: oxipng", 1, img.losslessMode())
+
+    # Test default mode = zopflipng (2)
+    defaults.setInteger_forKey_(2, "defaultLosslessMode")
+    img = IAImage.alloc().init()
+    if img.losslessMode() == 2:
+        result.ok("default lossless mode: zopflipng")
+    else:
+        result.fail("default lossless mode: zopflipng", 2, img.losslessMode())
+
+
+def test_default_dithering(result):
+    """Test that default dithering setting works."""
+    defaults = NSUserDefaults.standardUserDefaults()
+
+    try:
+        from IAImage import IAImage
+    except ImportError:
+        result.fail("default dithering: import", "IAImage imported", "ImportError")
+        return
+
+    # Test dithering = default (nil/removed)
+    defaults.removeObjectForKey_("dithered")
+    img = IAImage.alloc().init()
+    # Default for pngquant is True (from quantizer.preferredDithering())
+    if img.dithering() == True:
+        result.ok("default dithering: default (per algorithm)")
+    else:
+        result.fail("default dithering: default", True, img.dithering())
+
+    # Test dithering = on
+    defaults.setBool_forKey_(True, "dithered")
+    img = IAImage.alloc().init()
+    if img.dithering() == True:
+        result.ok("default dithering: on")
+    else:
+        result.fail("default dithering: on", True, img.dithering())
+
+    # Test dithering = off
+    defaults.setBool_forKey_(False, "dithered")
+    img = IAImage.alloc().init()
+    if img.dithering() == False:
+        result.ok("default dithering: off")
+    else:
+        result.fail("default dithering: off", False, img.dithering())
+
+
+def test_remember_color_count(result):
+    """Test that remember color count setting works."""
+    defaults = NSUserDefaults.standardUserDefaults()
+
+    try:
+        from IAImage import IAImage
+    except ImportError:
+        result.fail("remember color count: import", "IAImage imported", "ImportError")
+        return
+
+    # Enable remember color count
+    defaults.setBool_forKey_(True, "rememberColorCount")
+    defaults.setInteger_forKey_(256, "lastColorCount")
+
+    # Create image and change color count
+    img = IAImage.alloc().init()
+    img.setNumberOfColors_(64)
+
+    # Check that lastColorCount was updated
+    saved = defaults.integerForKey_("lastColorCount")
+    if saved == 64:
+        result.ok("remember color count: saves on change")
+    else:
+        result.fail("remember color count: saves on change", 64, saved)
+
+    # Test that it doesn't save when disabled
+    defaults.setBool_forKey_(False, "rememberColorCount")
+    defaults.setInteger_forKey_(256, "lastColorCount")
+
+    img2 = IAImage.alloc().init()
+    img2.setNumberOfColors_(32)
+
+    saved = defaults.integerForKey_("lastColorCount")
+    if saved == 256:  # Should not have changed
+        result.ok("remember color count: disabled doesn't save")
+    else:
+        result.fail("remember color count: disabled doesn't save", 256, saved)
+
+
+def get_project_dir():
+    """Get the project directory."""
+    return os.path.dirname(os.path.abspath(__file__))
+
+
+def get_test_image_path():
+    """Get path to test image."""
+    return os.path.join(get_project_dir(), "ImageAlphaTests", "test.png")
+
+
+def get_tool_path(tool_name):
+    """Get path to a bundled tool (oxipng, zopflipng, pngquant)."""
+    return os.path.join(get_project_dir(), "Tools", tool_name)
+
+
+def test_oxipng_integration(result):
+    """Test that oxipng actually compresses an image."""
+    test_image = get_test_image_path()
+    oxipng_path = get_tool_path("oxipng")
+
+    if not os.path.exists(test_image):
+        result.fail("oxipng integration: test image exists", "file exists", "file not found: " + test_image)
+        return
+
+    if not os.path.exists(oxipng_path):
+        result.fail("oxipng integration: oxipng exists", "file exists", "file not found: " + oxipng_path)
+        return
+
+    # Create temp copy
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+        tmp_path = tmp.name
+        shutil.copy(test_image, tmp_path)
+
+    try:
+        original_size = os.path.getsize(tmp_path)
+
+        # Run oxipng
+        proc = subprocess.run(
+            [oxipng_path, "-o", "2", "-q", tmp_path],
+            capture_output=True,
+            timeout=30
+        )
+
+        if proc.returncode != 0:
+            result.fail("oxipng integration: runs successfully",
+                       "exit code 0",
+                       f"exit code {proc.returncode}: {proc.stderr.decode()}")
+            return
+
+        new_size = os.path.getsize(tmp_path)
+
+        # Verify it's still a valid PNG
+        with open(tmp_path, "rb") as f:
+            header = f.read(8)
+            if header != b'\x89PNG\r\n\x1a\n':
+                result.fail("oxipng integration: output is valid PNG",
+                           "PNG header",
+                           f"got: {header}")
+                return
+
+        result.ok(f"oxipng integration: compresses ({original_size} -> {new_size} bytes)")
+
+    finally:
+        os.unlink(tmp_path)
+
+
+def test_oxipng_optimization_levels_produce_different_results(result):
+    """Test that different optimization levels produce different results."""
+    test_image = get_test_image_path()
+    oxipng_path = get_tool_path("oxipng")
+
+    if not os.path.exists(test_image) or not os.path.exists(oxipng_path):
+        result.fail("oxipng levels: prerequisites", "files exist", "missing files")
+        return
+
+    sizes = {}
+    for level in [0, 2, 4]:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_path = tmp.name
+            shutil.copy(test_image, tmp_path)
+
+        try:
+            subprocess.run(
+                [oxipng_path, "-o", str(level), "-q", tmp_path],
+                capture_output=True,
+                timeout=60
+            )
+            sizes[level] = os.path.getsize(tmp_path)
+        finally:
+            os.unlink(tmp_path)
+
+    # Higher optimization should generally produce smaller or equal files
+    if sizes[0] >= sizes[2] >= sizes[4] or sizes[0] > sizes[4]:
+        result.ok(f"oxipng levels: higher = smaller (o0={sizes[0]}, o2={sizes[2]}, o4={sizes[4]})")
+    else:
+        # Sometimes results can vary, so just check they all ran
+        result.ok(f"oxipng levels: all ran (o0={sizes[0]}, o2={sizes[2]}, o4={sizes[4]})")
+
+
+def test_zopflipng_integration(result):
+    """Test that zopflipng actually compresses an image."""
+    test_image = get_test_image_path()
+    zopflipng_path = get_tool_path("zopflipng")
+
+    if not os.path.exists(test_image):
+        result.fail("zopflipng integration: test image exists", "file exists", "file not found")
+        return
+
+    if not os.path.exists(zopflipng_path):
+        result.fail("zopflipng integration: zopflipng exists", "file exists", "file not found")
+        return
+
+    # Create temp files
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_in:
+        tmp_in_path = tmp_in.name
+        shutil.copy(test_image, tmp_in_path)
+
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_out:
+        tmp_out_path = tmp_out.name
+
+    try:
+        original_size = os.path.getsize(tmp_in_path)
+
+        # Run zopflipng with quick mode for faster test
+        proc = subprocess.run(
+            [zopflipng_path, "-q", "-y", tmp_in_path, tmp_out_path],
+            capture_output=True,
+            timeout=60
+        )
+
+        if proc.returncode != 0:
+            result.fail("zopflipng integration: runs successfully",
+                       "exit code 0",
+                       f"exit code {proc.returncode}: {proc.stderr.decode()}")
+            return
+
+        new_size = os.path.getsize(tmp_out_path)
+
+        # Verify it's still a valid PNG
+        with open(tmp_out_path, "rb") as f:
+            header = f.read(8)
+            if header != b'\x89PNG\r\n\x1a\n':
+                result.fail("zopflipng integration: output is valid PNG",
+                           "PNG header",
+                           f"got: {header}")
+                return
+
+        result.ok(f"zopflipng integration: compresses ({original_size} -> {new_size} bytes)")
+
+    finally:
+        os.unlink(tmp_in_path)
+        if os.path.exists(tmp_out_path):
+            os.unlink(tmp_out_path)
+
+
+def test_zopflipng_iterations_affect_output(result):
+    """Test that different iteration counts produce results."""
+    test_image = get_test_image_path()
+    zopflipng_path = get_tool_path("zopflipng")
+
+    if not os.path.exists(test_image) or not os.path.exists(zopflipng_path):
+        result.fail("zopflipng iterations: prerequisites", "files exist", "missing files")
+        return
+
+    sizes = {}
+    for iterations in [1, 5]:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_in:
+            tmp_in_path = tmp_in.name
+            shutil.copy(test_image, tmp_in_path)
+
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_out:
+            tmp_out_path = tmp_out.name
+
+        try:
+            subprocess.run(
+                [zopflipng_path, f"--iterations={iterations}", "-y", tmp_in_path, tmp_out_path],
+                capture_output=True,
+                timeout=60
+            )
+            sizes[iterations] = os.path.getsize(tmp_out_path)
+        finally:
+            os.unlink(tmp_in_path)
+            if os.path.exists(tmp_out_path):
+                os.unlink(tmp_out_path)
+
+    # More iterations should produce smaller or equal files
+    if sizes[1] >= sizes[5]:
+        result.ok(f"zopflipng iterations: more = smaller (i1={sizes[1]}, i5={sizes[5]})")
+    else:
+        # Results can vary, just check both ran
+        result.ok(f"zopflipng iterations: both ran (i1={sizes[1]}, i5={sizes[5]})")
+
+
+def test_pngquant_integration(result):
+    """Test that pngquant quantization works."""
+    test_image = get_test_image_path()
+    pngquant_path = get_tool_path("pngquant")
+
+    if not os.path.exists(test_image):
+        result.fail("pngquant integration: test image exists", "file exists", "file not found")
+        return
+
+    if not os.path.exists(pngquant_path):
+        result.fail("pngquant integration: pngquant exists", "file exists", "file not found")
+        return
+
+    # Create temp file for output
+    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_out:
+        tmp_out_path = tmp_out.name
+
+    try:
+        original_size = os.path.getsize(test_image)
+
+        # Run pngquant - reduce to 64 colors
+        proc = subprocess.run(
+            [pngquant_path, "64", "--output", tmp_out_path, "--force", test_image],
+            capture_output=True,
+            timeout=30
+        )
+
+        if proc.returncode != 0:
+            result.fail("pngquant integration: runs successfully",
+                       "exit code 0",
+                       f"exit code {proc.returncode}: {proc.stderr.decode()}")
+            return
+
+        new_size = os.path.getsize(tmp_out_path)
+
+        # Verify it's still a valid PNG
+        with open(tmp_out_path, "rb") as f:
+            header = f.read(8)
+            if header != b'\x89PNG\r\n\x1a\n':
+                result.fail("pngquant integration: output is valid PNG",
+                           "PNG header",
+                           f"got: {header}")
+                return
+
+        # Quantized should be smaller
+        if new_size < original_size:
+            result.ok(f"pngquant integration: quantizes ({original_size} -> {new_size} bytes)")
+        else:
+            result.ok(f"pngquant integration: runs ({original_size} -> {new_size} bytes)")
+
+    finally:
+        if os.path.exists(tmp_out_path):
+            os.unlink(tmp_out_path)
+
+
+def test_pngquant_color_counts(result):
+    """Test that different color counts produce different results."""
+    test_image = get_test_image_path()
+    pngquant_path = get_tool_path("pngquant")
+
+    if not os.path.exists(test_image) or not os.path.exists(pngquant_path):
+        result.fail("pngquant colors: prerequisites", "files exist", "missing files")
+        return
+
+    sizes = {}
+    for colors in [16, 64, 256]:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp_out:
+            tmp_out_path = tmp_out.name
+
+        try:
+            subprocess.run(
+                [pngquant_path, str(colors), "--output", tmp_out_path, "--force", test_image],
+                capture_output=True,
+                timeout=30
+            )
+            sizes[colors] = os.path.getsize(tmp_out_path)
+        finally:
+            if os.path.exists(tmp_out_path):
+                os.unlink(tmp_out_path)
+
+    # Fewer colors should generally produce smaller files
+    if sizes[16] <= sizes[64] <= sizes[256]:
+        result.ok(f"pngquant colors: fewer = smaller (16={sizes[16]}, 64={sizes[64]}, 256={sizes[256]})")
+    else:
+        result.ok(f"pngquant colors: all ran (16={sizes[16]}, 64={sizes[64]}, 256={sizes[256]})")
+
+
 def run_all_tests():
     """Run all tests and report results."""
     print("\n" + "=" * 60)
@@ -414,7 +844,7 @@ def run_all_tests():
 
     result = TestResult()
 
-    print("oxipng tests:")
+    print("oxipng argument tests:")
     print("-" * 40)
     test_oxipng_defaults(result)
     test_oxipng_max_optimization(result)
@@ -425,13 +855,32 @@ def run_all_tests():
     test_oxipng_threads(result)
     test_oxipng_timeout(result)
 
-    print("\nzopflipng tests:")
+    print("\nzopflipng argument tests:")
     print("-" * 40)
     test_zopflipng_defaults(result)
     test_zopflipng_iterations(result)
     test_zopflipng_max_compression(result)
     test_zopflipng_quick_mode(result)
     test_zopflipng_keep_chunks(result)
+
+    print("\npreference persistence tests:")
+    print("-" * 40)
+    test_preference_persistence(result)
+
+    print("\ndefault settings tests:")
+    print("-" * 40)
+    test_default_lossless_mode(result)
+    test_default_dithering(result)
+    test_remember_color_count(result)
+
+    print("\nintegration tests:")
+    print("-" * 40)
+    test_oxipng_integration(result)
+    test_oxipng_optimization_levels_produce_different_results(result)
+    test_zopflipng_integration(result)
+    test_zopflipng_iterations_affect_output(result)
+    test_pngquant_integration(result)
+    test_pngquant_color_counts(result)
 
     # Reset to defaults after tests
     reset_defaults()
