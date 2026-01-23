@@ -16,7 +16,21 @@
       "Bash(security find-identity:*)",
       "Bash(python3:*)",
       "Bash(./Frameworks/Python.framework/Versions/3.13/bin/python3:*)",
-      "Bash(xcodebuild:*)"
+      "Bash(xcodebuild:*)",
+      "Bash(cd:*)",
+      "Bash(APP=~/Library/Developer/Xcode/Archives/2026-01-22/*.xcarchive/Products/Users/erutan/Applications/ImageAlpha.app:*)",
+      "Bash(__NEW_LINE_3f85410ca4864c63__)",
+      "Bash(PYTHON_O=\"$APP/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/config-3.13-darwin/python.o\":*)",
+      "Bash(if [ -f \"$PYTHON_O\" ])",
+      "Bash(then)",
+      "Bash(codesign -dvv \"$PYTHON_O\")",
+      "Bash(echo \"=== Checking Python.framework structure ===\" ls \"$APP/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/\")",
+      "Bash(codesign:*)",
+      "Bash(xcrun notarytool log fde3ccac-1bd9-481e-8a91-af78db900659 --keychain-profile \"ImageAlpha\")",
+      "Bash(./sign-for-notarization.sh:*)",
+      "Bash(ditto:*)",
+      "Bash(xcrun notarytool submit:*)",
+      "Bash(xcrun stapler:*)"
     ]
   }
 }
