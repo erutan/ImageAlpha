@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "1600"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+               BuildableName = "ImageAlpha.app"
+               BlueprintName = "ImageAlpha"
+               ReferencedContainer = "container:ImageAlpha.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+            BuildableName = "ImageAlpha.app"
+            BlueprintName = "ImageAlpha"
+            ReferencedContainer = "container:ImageAlpha.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+            BuildableName = "ImageAlpha.app"
+            BlueprintName = "ImageAlpha"
+            ReferencedContainer = "container:ImageAlpha.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Sign for Notarization"
+               scriptText = "#!/bin/bash&#10;&#10;# Post-archive script to sign the app for notarization&#10;# The archive is at: $ARCHIVE_PATH&#10;# The app is at: $ARCHIVE_PRODUCTS_PATH/Applications/ImageAlpha.app&#10;&#10;APP=&quot;$ARCHIVE_PRODUCTS_PATH/Applications/ImageAlpha.app&quot;&#10;&#10;if [ ! -d &quot;$APP&quot; ]; then&#10;    # Try alternate path&#10;    APP=&quot;$ARCHIVE_PRODUCTS_PATH/Users/$USER/Applications/ImageAlpha.app&quot;&#10;fi&#10;&#10;if [ ! -d &quot;$APP&quot; ]; then&#10;    echo &quot;ERROR: Could not find ImageAlpha.app in archive&quot;&#10;    echo &quot;ARCHIVE_PATH: $ARCHIVE_PATH&quot;&#10;    echo &quot;ARCHIVE_PRODUCTS_PATH: $ARCHIVE_PRODUCTS_PATH&quot;&#10;    exit 1&#10;fi&#10;&#10;SCRIPT=&quot;$SRCROOT/sign-for-notarization.sh&quot;&#10;&#10;if [ ! -f &quot;$SCRIPT&quot; ]; then&#10;    echo &quot;ERROR: Signing script not found at $SCRIPT&quot;&#10;    exit 1&#10;fi&#10;&#10;echo &quot;=== Running post-archive signing script ===&quot;&#10;echo &quot;App: $APP&quot;&#10;&#10;&quot;$SCRIPT&quot; &quot;$APP&quot;&#10;&#10;echo &quot;&quot;&#10;echo &quot;=== Signing complete ===&quot;&#10;echo &quot;You can now distribute the archive from Xcode Organizer&quot;&#10;"
+               shellToInvoke = "/bin/bash">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "8D15AC270486D014006FF6A4"
+                     BuildableName = "ImageAlpha.app"
+                     BlueprintName = "ImageAlpha"
+                     ReferencedContainer = "container:ImageAlpha.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+   </ArchiveAction>
+</Scheme>

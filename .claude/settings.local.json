@@ -30,7 +30,11 @@
       "Bash(./sign-for-notarization.sh:*)",
       "Bash(ditto:*)",
       "Bash(xcrun notarytool submit:*)",
-      "Bash(xcrun stapler:*)"
+      "Bash(xcrun stapler:*)",
+      "Bash(# Find and list any .cstemp files find ~/Library/Developer/Xcode/Archives/2026-01-22/*.xcarchive -name \"\"*.cstemp\"\")",
+      "Bash(APP=\"/Users/erutan/Library/Developer/Xcode/Archives/2026-01-22/ImageAlpha 1-22-26, 8.50 PM.xcarchive/Products/Users/erutan/Applications/ImageAlpha.app\")",
+      "Bash(__NEW_LINE_16d601c5be4cc086__ echo \"=== Verifying full signature ===\")",
+      "Bash(__NEW_LINE_16d601c5be4cc086__ echo \"\")"
     ]
   }
 }
