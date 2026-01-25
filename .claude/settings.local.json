@@ -41,7 +41,14 @@
       "Bash(/tmp/test-app/ImageAlpha.app/Contents/MacOS/ImageAlpha)",
       "Bash(open:*)",
       "Bash(find:*)",
-      "Bash(spctl --assess:*)"
+      "Bash(spctl --assess:*)",
+      "Bash(sample:*)",
+      "Bash(osascript:*)",
+      "Bash(xattr:*)",
+      "Bash(/Users/erutan/Repos/ImageAlpha/sign-for-notarization.sh:*)",
+      "Bash(pkill:*)",
+      "Bash(kill:*)",
+      "Bash(/Applications/ImageAlpha.app/Contents/MacOS/pngquant:*)"
     ]
   }
 }

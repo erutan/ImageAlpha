@@ -25,6 +25,35 @@ find "$APP" -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 find "$APP" -type f -name "*.pyc" -delete 2>/dev/null || true
 echo "  Removed __pycache__ directories and .pyc files"
 
+# Step 0.5: Bundle pngquant's Homebrew library dependencies
+echo ""
+echo "=== Step 0.5: Bundling pngquant libraries ==="
+MACOS_DIR="$APP/Contents/MacOS"
+PNGQUANT="$MACOS_DIR/pngquant"
+LCMS2_SRC="/opt/homebrew/opt/little-cms2/lib/liblcms2.2.dylib"
+LIBPNG_SRC="/opt/homebrew/opt/libpng/lib/libpng16.16.dylib"
+
+if [ -f "$PNGQUANT" ] && [ -f "$LCMS2_SRC" ] && [ -f "$LIBPNG_SRC" ]; then
+    # Check if pngquant still references Homebrew paths (not already bundled)
+    if otool -L "$PNGQUANT" | grep -q "/opt/homebrew"; then
+        echo "  Copying liblcms2.2.dylib..."
+        cp "$LCMS2_SRC" "$MACOS_DIR/liblcms2.2.dylib"
+        echo "  Copying libpng16.16.dylib..."
+        cp "$LIBPNG_SRC" "$MACOS_DIR/libpng16.16.dylib"
+        echo "  Fixing library paths in pngquant..."
+        install_name_tool -change "/opt/homebrew/opt/little-cms2/lib/liblcms2.2.dylib" "@executable_path/liblcms2.2.dylib" "$PNGQUANT"
+        install_name_tool -change "/opt/homebrew/opt/libpng/lib/libpng16.16.dylib" "@executable_path/libpng16.16.dylib" "$PNGQUANT"
+        echo "  Fixing library IDs..."
+        install_name_tool -id "@executable_path/liblcms2.2.dylib" "$MACOS_DIR/liblcms2.2.dylib"
+        install_name_tool -id "@executable_path/libpng16.16.dylib" "$MACOS_DIR/libpng16.16.dylib"
+        echo "  Libraries bundled successfully"
+    else
+        echo "  Libraries already bundled (pngquant doesn't reference /opt/homebrew)"
+    fi
+else
+    echo "  Skipping library bundling (pngquant or Homebrew libs not found)"
+fi
+
 # Find Developer ID Application certificate
 IDENTITY=$(security find-identity -v -p codesigning | grep "Developer ID Application" | head -1 | sed 's/.*"\(.*\)".*/\1/')
 if [ -z "$IDENTITY" ]; then
@@ -105,14 +134,45 @@ echo "=== Step 8: Sign Python.framework ==="
 sign_item "$PYFRAMEWORK"
 
 echo ""
-echo "=== Step 9: Sign CLI tools ==="
-[ -f "$APP/Contents/MacOS/pngquant" ] && sign_item "$APP/Contents/MacOS/pngquant"
-[ -f "$APP/Contents/MacOS/oxipng" ] && sign_item "$APP/Contents/MacOS/oxipng"
-[ -f "$APP/Contents/MacOS/zopflipng" ] && sign_item "$APP/Contents/MacOS/zopflipng"
+echo "=== Step 9: Sign bundled libraries ==="
+# These are bundled Homebrew libraries for pngquant
+[ -f "$APP/Contents/MacOS/liblcms2.2.dylib" ] && sign_item "$APP/Contents/MacOS/liblcms2.2.dylib"
+[ -f "$APP/Contents/MacOS/libpng16.16.dylib" ] && sign_item "$APP/Contents/MacOS/libpng16.16.dylib"
 
 echo ""
-echo "=== Step 10: Sign main app bundle ==="
-sign_item "$APP"
+echo "=== Step 10: Sign CLI tools (with entitlements) ==="
+# CLI tools run as subprocesses and need their own entitlements
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+ENTITLEMENTS="$SCRIPT_DIR/ImageAlpha.entitlements"
+sign_cli_tool() {
+    if [ -f "$1" ]; then
+        echo "  Signing with entitlements: $1"
+        if [ -f "$ENTITLEMENTS" ]; then
+            codesign --force --options runtime --timestamp --entitlements "$ENTITLEMENTS" --sign "$IDENTITY" "$1" || {
+                echo "    ERROR: Failed to sign $1"
+                return 1
+            }
+        else
+            sign_item "$1"
+        fi
+    fi
+}
+sign_cli_tool "$APP/Contents/MacOS/pngquant"
+sign_cli_tool "$APP/Contents/MacOS/oxipng"
+sign_cli_tool "$APP/Contents/MacOS/zopflipng"
+
+echo ""
+echo "=== Step 10: Sign main app bundle (with entitlements) ==="
+if [ -f "$ENTITLEMENTS" ]; then
+    echo "  Using entitlements: $ENTITLEMENTS"
+    codesign --force --options runtime --timestamp --entitlements "$ENTITLEMENTS" --sign "$IDENTITY" "$APP" || {
+        echo "    ERROR: Failed to sign $APP"
+        exit 1
+    }
+else
+    echo "  WARNING: Entitlements file not found, signing without entitlements"
+    sign_item "$APP"
+fi
 
 echo ""
 echo "=== Verifying signature ==="
