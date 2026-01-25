@@ -34,7 +34,14 @@
       "Bash(# Find and list any .cstemp files find ~/Library/Developer/Xcode/Archives/2026-01-22/*.xcarchive -name \"\"*.cstemp\"\")",
       "Bash(APP=\"/Users/erutan/Library/Developer/Xcode/Archives/2026-01-22/ImageAlpha 1-22-26, 8.50 PM.xcarchive/Products/Users/erutan/Applications/ImageAlpha.app\")",
       "Bash(__NEW_LINE_16d601c5be4cc086__ echo \"=== Verifying full signature ===\")",
-      "Bash(__NEW_LINE_16d601c5be4cc086__ echo \"\")"
+      "Bash(__NEW_LINE_16d601c5be4cc086__ echo \"\")",
+      "Bash(install_name_tool:*)",
+      "Bash(log show:*)",
+      "Bash(\"/Users/erutan/Library/Developer/Xcode/Archives/2026-01-24/ImageAlpha 1-24-26, 9.39 PM.xcarchive/Products/Users/erutan/Applications/ImageAlpha.app/Contents/MacOS/ImageAlpha\")",
+      "Bash(/tmp/test-app/ImageAlpha.app/Contents/MacOS/ImageAlpha)",
+      "Bash(open:*)",
+      "Bash(find:*)",
+      "Bash(spctl --assess:*)"
     ]
   }
 }

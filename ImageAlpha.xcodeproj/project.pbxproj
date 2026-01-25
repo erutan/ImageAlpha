@@ -583,6 +583,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = ImageAlpha;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlpha;
@@ -627,6 +628,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = ImageAlpha;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INSTALL_PATH = "$(HOME)/Applications";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 2.0;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";

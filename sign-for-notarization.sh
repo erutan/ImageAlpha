@@ -18,6 +18,13 @@ fi
 
 echo "=== Signing $APP for Notarization ==="
 
+# Step 0: Remove __pycache__ directories to prevent bytecode from breaking signature
+echo ""
+echo "=== Step 0: Removing Python bytecode cache ==="
+find "$APP" -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
+find "$APP" -type f -name "*.pyc" -delete 2>/dev/null || true
+echo "  Removed __pycache__ directories and .pyc files"
+
 # Find Developer ID Application certificate
 IDENTITY=$(security find-identity -v -p codesigning | grep "Developer ID Application" | head -1 | sed 's/.*"\(.*\)".*/\1/')
 if [ -z "$IDENTITY" ]; then

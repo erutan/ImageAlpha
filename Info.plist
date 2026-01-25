@@ -49,6 +49,11 @@
 	<array>
 		<string>x86_64</string>
 	</array>
+	<key>LSEnvironment</key>
+	<dict>
+		<key>PYTHONDONTWRITEBYTECODE</key>
+		<string>1</string>
+	</dict>
 	<key>LSMinimumSystemVersion</key>
 	<string>13.0</string>
 	<key>NSMainNibFile</key>
