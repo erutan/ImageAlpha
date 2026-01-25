@@ -48,7 +48,12 @@
       "Bash(/Users/erutan/Repos/ImageAlpha/sign-for-notarization.sh:*)",
       "Bash(pkill:*)",
       "Bash(kill:*)",
-      "Bash(/Applications/ImageAlpha.app/Contents/MacOS/pngquant:*)"
+      "Bash(/Applications/ImageAlpha.app/Contents/MacOS/pngquant:*)",
+      "Bash(xargs cat:*)",
+      "Bash(git submodule:*)",
+      "Bash(git rm -f Sparkle)",
+      "Bash(git rm -f mediancut-posterizer)",
+      "Bash(git rm:*)"
     ]
   }
 }

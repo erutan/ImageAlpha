@@ -4,7 +4,6 @@ import objc
 from objc import *
 from Foundation import *
 from AppKit import *
-from math import log
 import os
 import shutil
 import threading
@@ -14,68 +13,23 @@ class Quantizer(object):
     def qualityLabel(self):
         return "Colors"
 
-    def supportsIeMode(self):
-        return False
-
     def preferredDithering(self):
         return True
 
     def numberOfColorsToQuality(self, colors):
         return colors;
 
-    def versionId(self, colors, dithering, ieMode):
-        return "c%d:m%s:d%d%d" % (self.numberOfColorsToQuality(colors), self.__class__.__name__, dithering, ieMode)
+    def versionId(self, colors, dithering):
+        return "c%d:m%s:d%d" % (self.numberOfColorsToQuality(colors), self.__class__.__name__, dithering)
 
 class Pngquant(Quantizer):
-    def supportsIeMode(self):
-        return False
-
-    def launchArguments(self, dither, colors, ieMode):
+    def launchArguments(self, dither, colors):
         args = []
         if not dither:
             args.append("--nofs")
         args.append("%d" % colors)
         args.append("-")
         return ("pngquant", args)
-
-class Pngnq(Quantizer):
-    def launchArguments(self, dither, colors, ieMode):
-        return ("pngnq", ["-Q","f" if dither else "n","-n","%d" % colors, "-"])
-
-class Posterizer(Quantizer):
-    def qualityLabel(self):
-        return "Quality"
-
-    def preferredDithering(self):
-        return False
-
-    def numberOfColorsToQuality(self, c):
-        return round(15 + (c * 240 / 255));
-
-    def launchArguments(self, dither, colors, ieMode):
-        args = ["%d" % self.numberOfColorsToQuality(colors)];
-        if dither:
-            args.insert(0,"-d")
-        args.append("-")
-        return ("posterizer",args);
-
-class Blurizer(Quantizer):
-    def qualityLabel(self):
-        return "Quality"
-
-    def preferredDithering(self):
-        return True
-
-    def versionId(self, colors, dithering, ieMode):
-        return "blur%d" % self.numberOfColorsToQuality(colors)
-
-    def numberOfColorsToQuality(self, c):
-        return round(255 - 12 + 1.5*log(c, 2));
-
-    def launchArguments(self, dither, colors, ieMode):
-        args = ["-b", "%d" % self.numberOfColorsToQuality(colors)];
-        args.append("-")
-        return ("posterizer",args);
 
 
 class IAImage(NSObject):
@@ -133,15 +87,6 @@ class IAImage(NSObject):
         self.path = path
         (attrs,error) = NSFileManager.defaultManager().attributesOfItemAtPath_error_(self.path,None);
         self._sourceFileSize = attrs.objectForKey_(NSFileSize) if attrs is not None and error is None else None;
-
-    def ieMode(self):
-        return self._losslessMode == 1
-
-    def setIeMode_(self,val):
-        if int(val) > 0:
-            self._setLosslessMode(1)
-        else:
-            self._setLosslessMode(0)
 
     def losslessNone(self):
         return self._losslessMode == 0
@@ -261,7 +206,7 @@ class IAImage(NSObject):
                 if self.callbackWhenImageChanges is not None: self.callbackWhenImageChanges.imageChanged();
 
     def currentVersionId(self):
-        base_id = self.quantizer().versionId(self.numberOfColors(), self.dithering(), self.ieMode())
+        base_id = self.quantizer().versionId(self.numberOfColors(), self.dithering())
         return "%s:l%d" % (base_id, self.losslessMode())
 
     def destroy(self):
@@ -286,7 +231,7 @@ class IAImageVersion(NSObject):
         self.callbackWhenFinished = callbackWhenFinished
         self.losslessMode = int(losslessMode)
 
-        (executable, args) = quantizer.launchArguments(dither, colors, 0)
+        (executable, args) = quantizer.launchArguments(dither, colors)
 
         task = NSTask.alloc().init()
         self.task = task

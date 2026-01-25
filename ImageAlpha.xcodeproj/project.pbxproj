@@ -34,7 +34,6 @@
 		5A43016F16629393000E55BA /* IABackgroundRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A43016E16629393000E55BA /* IABackgroundRenderer.m */; };
 		5A6B42DD0E96E50100ACA396 /* ImageAlpha.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5A6B42DC0E96E50100ACA396 /* ImageAlpha.icns */; };
 		5A6E7F92153C99F400D00506 /* IAColorBackgroundRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A6E7F91153C99F400D00506 /* IAColorBackgroundRenderer.m */; };
-		5A8CE14B0F5B5CDD002ED669 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 5A8CE14A0F5B5CDD002ED669 /* dsa_pub.pem */; };
 		5A91FE8B0E958375004954A0 /* IACollectionItem.py in Resources */ = {isa = PBXBuildFile; fileRef = 5A91FE8A0E958375004954A0 /* IACollectionItem.py */; };
 		5A91FE940E95837F004954A0 /* IAImageView.py in Resources */ = {isa = PBXBuildFile; fileRef = 5A91FE8D0E95837F004954A0 /* IAImageView.py */; };
 		5A91FE950E95837F004954A0 /* IAImageViewInteractive.py in Resources */ = {isa = PBXBuildFile; fileRef = 5A91FE8E0E95837F004954A0 /* IAImageViewInteractive.py */; };
@@ -98,7 +97,6 @@
 
 /* Begin PBXFileReference section */
 		1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		13E42FBA07B3F13500E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		1A2B3C4D5E6F7A8B9C0D1E30 /* IAPreferencesController.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; path = IAPreferencesController.py; sourceTree = "<group>"; };
 		1A2B3C4D5E6F7A8B9C0D1E33 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/Preferences.xib; sourceTree = "<group>"; };
 		2A37F4B0FDCFA73011CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -118,8 +116,6 @@
 		5A6B42DC0E96E50100ACA396 /* ImageAlpha.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = ImageAlpha.icns; sourceTree = "<group>"; };
 		5A6E7F90153C99F400D00506 /* IAColorBackgroundRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAColorBackgroundRenderer.h; sourceTree = "<group>"; };
 		5A6E7F91153C99F400D00506 /* IAColorBackgroundRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAColorBackgroundRenderer.m; sourceTree = "<group>"; };
-		5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = appcast.xml; sourceTree = "<group>"; };
-		5A8CE14A0F5B5CDD002ED669 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
 		5A91FE8A0E958375004954A0 /* IACollectionItem.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IACollectionItem.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		5A91FE8D0E95837F004954A0 /* IAImageView.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IAImageView.py; sourceTree = "<group>"; tabWidth = 4; usesTabs = 0; xcLanguageSpecificationIdentifier = xcode.lang.python; };
 		5A91FE8E0E95837F004954A0 /* IAImageViewInteractive.py */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.python; lineEnding = 0; path = IAImageViewInteractive.py; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.python; };
@@ -176,7 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */,
-				13E42FBA07B3F13500E4EEF1 /* CoreData.framework */,
 				2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */,
 			);
 			name = "Other Frameworks";
@@ -198,7 +193,6 @@
 				2A37F4ABFDCFA73011CA2CEA /* Classes */,
 				2A37F4AFFDCFA73011CA2CEA /* Other Sources */,
 				5AED10DC139BAC1400FF5C69 /* debug.xcconfig */,
-				5A7B7EDF0F5CA4DD00F72F1F /* appcast.xml */,
 				6D8D2A278C044808BD473D3F /* Tools/pngquant */,
 				910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */,
 				8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */,
@@ -239,7 +233,6 @@
 			isa = PBXGroup;
 			children = (
 				5A30108D0F55DE1B0083C154 /* textures */,
-				5A8CE14A0F5B5CDD002ED669 /* dsa_pub.pem */,
 				5A6B42DC0E96E50100ACA396 /* ImageAlpha.icns */,
 				779AE5F90C0A0980000694DF /* ImageAlphaDocument.xib */,
 				8D15AC360486D014006FF6A4 /* Info.plist */,
@@ -378,7 +371,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A8CE14B0F5B5CDD002ED669 /* dsa_pub.pem in Resources */,
 				5A91FE970E95837F004954A0 /* IABackgroundRenderer.py in Resources */,
 				5A91FE8B0E958375004954A0 /* IACollectionItem.py in Resources */,
 				5AA5327E0EE32FC700360305 /* IAImage.py in Resources */,

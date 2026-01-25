@@ -116,18 +116,8 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 		if self.statusBarView is not None: self.statusBarView.setStringValue_(msg);
 
 	def canSetDocumentImageFromPasteboard_(self,pboard):
-# disabled until in-memory image support is done
-#		 if NSImage.canInitWithPasteboard_(pboard):
-#			 NSLog("image will handle that");
-#			 return YES
-
 		type = pboard.availableTypeFromArray_([NSFilenamesPboardType]);
 		if type is not None:
-		# FIXME: check for PNGs here
-#			filenames = self.filenamesFromPasteboard_(pboard)
-#			NSLog("Filenames %s" % filenames);
-#			for f in filenames:
-#				NSLog("drop file %s" % f);
 			return YES
 
 	def filenamesFromPasteboard_(self,pboard):
@@ -145,12 +135,6 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 			for file in filenames:
 				if self.setDocumentImageFromPath_(file):
 					return YES
-
-# disabled until in-memory image support is done
-#		 if NSImage.canInitWithPasteboard_(pboard):
-#			 image = NSImage.alloc().initWithPasteboard_(pboard);
-#			 self.setDocumentImageFromImage_(image)
-#			 return YES
 
 		return NO
 
@@ -170,15 +154,7 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 		return YES
 
 	def setDocumentImageFromImage_(self,image):
-		return NO # not supported until iaimage can save temp image
-
-#		 if self.documentImage() is not None:
-#			 NSLog("That's not supported yet");
-#			 return NO
-
-#		 docimg = IAImage.alloc().init();
-#		 docimg.setImage_(image)
-#		 return self.setNewDocumentImage_(docimg);
+		return NO
 
 	def setNewDocumentImage_(self,docimg):
 		#NSLog("new dimage set");

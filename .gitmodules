@@ -1,6 +1,0 @@
-[submodule "Sparkle"]
-	path = Sparkle
-	url = https://github.com/sparkle-project/Sparkle.git
-[submodule "mediancut-posterizer"]
-	path = mediancut-posterizer
-	url = git@github.com:pornel/mediancut-posterizer.git

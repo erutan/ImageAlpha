@@ -197,9 +197,6 @@ class IAImageView(NSView):
 
         self.setNeedsDisplay_(YES)
 
-    def drawAlternateImage(self):
-        return self._drawAlternateImage == True
-
     def setBackgroundLayer_(self, layer):
         assert layer
         if self.layer() is None:

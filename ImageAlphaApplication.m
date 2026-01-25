@@ -46,4 +46,8 @@
     }
 }
 
+- (IBAction)checkForUpdates:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://github.com/erutan/ImageAlpha/releases"]];
+}
+
 @end
