@@ -51,7 +51,10 @@ class IAPreferencesController(NSWindowController):
         toolbar.setAllowsUserCustomization_(False)
         toolbar.setDisplayMode_(NSToolbarDisplayModeIconAndLabel)
         toolbar.setSelectedItemIdentifier_(TOOLBAR_GENERAL)
+        toolbar.setCenteredItemIdentifiers_(NSSet.setWithArray_([TOOLBAR_GENERAL, TOOLBAR_OXIPNG, TOOLBAR_ZOPFLIPNG]))
         self.window().setToolbar_(toolbar)
+        # Use modern preferences window style (title shows tab name, centered toolbar)
+        self.window().setToolbarStyle_(2)  # NSWindowToolbarStylePreference
         self._toolbar = toolbar
 
     # NSToolbar delegate methods
@@ -69,17 +72,23 @@ class IAPreferencesController(NSWindowController):
 
         if identifier == TOOLBAR_GENERAL:
             item.setLabel_("General")
-            item.setImage_(NSImage.imageNamed_(NSImageNamePreferencesGeneral))
+            # Use SF Symbol gear icon
+            gearImage = NSImage.imageWithSystemSymbolName_accessibilityDescription_("gearshape", "General")
+            item.setImage_(gearImage)
             item.setTarget_(self)
             item.setAction_(self.switchToGeneralTab_)
         elif identifier == TOOLBAR_OXIPNG:
             item.setLabel_("oxipng")
-            item.setImage_(NSImage.imageNamed_(NSImageNameAdvanced))
+            # Use SF Symbol compression icon
+            compressImage = NSImage.imageWithSystemSymbolName_accessibilityDescription_("arrow.down.right.and.arrow.up.left", "Compression")
+            item.setImage_(compressImage)
             item.setTarget_(self)
             item.setAction_(self.switchToOxipngTab_)
         elif identifier == TOOLBAR_ZOPFLIPNG:
             item.setLabel_("zopflipng")
-            item.setImage_(NSImage.imageNamed_(NSImageNameAdvanced))
+            # Use SF Symbol compression icon
+            compressImage = NSImage.imageWithSystemSymbolName_accessibilityDescription_("arrow.down.right.and.arrow.up.left", "Compression")
+            item.setImage_(compressImage)
             item.setTarget_(self)
             item.setAction_(self.switchToZopflipngTab_)
 
@@ -163,6 +172,14 @@ class IAPreferencesController(NSWindowController):
         # Update toolbar selection
         if self._toolbar is not None:
             self._toolbar.setSelectedItemIdentifier_(identifier)
+
+        # Update window title to show current tab name
+        tabNames = {
+            TOOLBAR_GENERAL: "General",
+            TOOLBAR_OXIPNG: "oxipng",
+            TOOLBAR_ZOPFLIPNG: "zopflipng"
+        }
+        window.setTitle_(tabNames.get(identifier, "Preferences"))
 
 
 # Action that can be called from First Responder
