@@ -298,6 +298,7 @@
 				5AF2D49C1AED3A9200E761BA /* CopyFiles */,
 				8D15AC330486D014006FF6A4 /* Frameworks */,
 				5A8CE1460F5B5BD5002ED669 /* Copy Frameworks */,
+				STRIP0PY0000000001 /* Strip Python Framework */,
 				7F9C6B2E4C1A4D5B9E4A1C3D /* ShellScript */,
 			);
 			buildRules = (
@@ -391,6 +392,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		STRIP0PY0000000001 /* Strip Python Framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Strip Python Framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "# Strip unnecessary Python files from framework to reduce app size\n# This saves ~50MB by removing tests, pip, docs, headers, etc.\n\nPYTHON_FW=\"$BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH/Python.framework/Versions/3.13\"\n\nif [ -d \"$PYTHON_FW\" ]; then\n    echo \"Stripping unnecessary files from Python.framework...\"\n    \n    # Remove test suite (32MB)\n    rm -rf \"$PYTHON_FW/lib/python3.13/test\"\n    \n    # Remove pip (6MB) - not needed at runtime\n    rm -rf \"$PYTHON_FW/lib/python3.13/site-packages/pip\"\n    \n    # Remove IDLE (1.9MB) - Python IDE not needed\n    rm -rf \"$PYTHON_FW/lib/python3.13/idlelib\"\n    \n    # Remove ensurepip (1.7MB)\n    rm -rf \"$PYTHON_FW/lib/python3.13/ensurepip\"\n    \n    # Remove tkinter (316K) - GUI toolkit not used\n    rm -rf \"$PYTHON_FW/lib/python3.13/tkinter\"\n    \n    # Remove unittest (276K) - not needed at runtime\n    rm -rf \"$PYTHON_FW/lib/python3.13/unittest\"\n    \n    # Remove header files (2.3MB) - only needed for compiling\n    rm -rf \"$PYTHON_FW/include\"\n    \n    # Remove docs/share (4.6MB)\n    rm -rf \"$PYTHON_FW/share\"\n    \n    # Remove bin directory (180K) - standalone executables not needed\n    rm -rf \"$PYTHON_FW/bin\"\n    \n    # Remove __pycache__ directories\n    find \"$PYTHON_FW\" -name \"__pycache__\" -type d -exec rm -rf {} + 2>/dev/null || true\n    \n    echo \"Python framework stripped successfully.\"\nelse\n    echo \"Python.framework not found at expected location, skipping.\"\nfi\n";
+		};
 		5A8CE1910F5B5E1D002ED669 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

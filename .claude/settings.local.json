@@ -54,7 +54,9 @@
       "Bash(git rm -f Sparkle)",
       "Bash(git rm -f mediancut-posterizer)",
       "Bash(git rm:*)",
-      "Bash(xmllint:*)"
+      "Bash(xmllint:*)",
+      "Bash(xargs:*)",
+      "Bash(du:*)"
     ]
   }
 }
