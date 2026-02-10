@@ -56,7 +56,24 @@
       "Bash(git rm:*)",
       "Bash(xmllint:*)",
       "Bash(xargs:*)",
-      "Bash(du:*)"
+      "Bash(du:*)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(make:*)",
+      "Bash(/tmp/mediancut-posterizer/posterize:*)",
+      "Bash(/usr/bin/log show:*)",
+      "Bash(/Users/erutan/Repos/ImageAlpha/Tools/posterize:*)",
+      "Bash(# Find a real PNG to test with ls /Users/erutan/Repos/ImageAlpha/textures/*.png || ls /Users/erutan/Repos/ImageAlpha/textures/*.jpg)",
+      "Bash(# Test blur effect at 255 levels \\(the default when slider is at max\\) vs lower levels # Use a test PNG if available ls /Users/erutan/Repos/ImageAlpha/test*.png /Users/erutan/Repos/ImageAlpha/*.png)",
+      "Bash(killall:*)",
+      "Bash(git -C /Users/erutan/Repos/ImageAlpha status)",
+      "Bash(# Size breakdown of the Python framework in the built app APP=\"\"/Users/erutan/Library/Developer/Xcode/DerivedData/ImageAlpha-bfvuflxxcioaztazzfkvxpdpsayx/Build/Products/Debug/ImageAlpha.app\"\" du -sh \"\"$APP/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/\"\"*/)",
+      "Bash(# Check what''s in site-packages \\(24 MB\\) APP=\"\"/Users/erutan/Library/Developer/Xcode/DerivedData/ImageAlpha-bfvuflxxcioaztazzfkvxpdpsayx/Build/Products/Debug/ImageAlpha.app\"\" du -sh \"\"$APP/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages/\"\"*/)",
+      "Bash(# Check how the Python framework is being built/trimmed - look for setup scripts ls /Users/erutan/Repos/ImageAlpha/scripts/ # Check if there''s a build phase script in Xcode that trims grep -l \"\"python\\\\|trim\\\\|strip\\\\|remove\\\\|clean\"\" /Users/erutan/Repos/ImageAlpha/*.sh # Check for any run script build phases in the Xcode project grep -A5 \"\"PBXShellScript\"\" /Users/erutan/Repos/ImageAlpha/ImageAlpha.xcodeproj/project.pbxproj)",
+      "Bash(# First, let me identify exactly which PyObjC frameworks the app needs # Check transitive dependencies APP=\"\"/Users/erutan/Library/Developer/Xcode/DerivedData/ImageAlpha-bfvuflxxcioaztazzfkvxpdpsayx/Build/Products/Debug/ImageAlpha.app\"\" SITE=\"\"$APP/Contents/Frameworks/Python.framework/Versions/3.13/lib/python3.13/site-packages\"\" # List all PyObjC framework dirs and their sizes echo \"\"=== All PyObjC framework dirs ===\"\" du -sh \"\"$SITE\"\"/*/)",
+      "Bash(APP=\"/Users/erutan/Library/Developer/Xcode/DerivedData/ImageAlpha-bfvuflxxcioaztazzfkvxpdpsayx/Build/Products/Debug/ImageAlpha.app\")",
+      "Bash(git -C /Users/erutan/Repos/ImageAlpha diff --stat)",
+      "Bash(# Find the most recent log directory ls -dt /private/var/folders/fm/ssdky57j5wjf42g7198_4n380000gn/T/ImageAlpha*.xcdistributionlogs)",
+      "Bash(xcrun notarytool log:*)"
     ]
   }
 }

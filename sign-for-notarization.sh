@@ -127,6 +127,8 @@ PYAPP="$PYVER/Resources/Python.app"
 if [ -d "$PYAPP" ]; then
     [ -f "$PYAPP/Contents/MacOS/Python" ] && sign_item "$PYAPP/Contents/MacOS/Python"
     sign_item "$PYAPP"
+else
+    echo "  Python.app not present (removed by strip phase) - skipping"
 fi
 
 echo ""
@@ -158,6 +160,7 @@ sign_cli_tool() {
     fi
 }
 sign_cli_tool "$APP/Contents/MacOS/pngquant"
+sign_cli_tool "$APP/Contents/MacOS/posterize"
 sign_cli_tool "$APP/Contents/MacOS/oxipng"
 sign_cli_tool "$APP/Contents/MacOS/zopflipng"
 
