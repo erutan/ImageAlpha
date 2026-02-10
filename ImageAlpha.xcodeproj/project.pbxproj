@@ -49,6 +49,7 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 		8D1C0E2F4B6A4A1B8E9F0C1D /* Tools/zopflipng in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		A1B2C3D4E5F60718 /* Tools/posterize in CopyFiles */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60719 /* Tools/posterize */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		AABBCCDD00112233 /* CompressionSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBCCDD00112234 /* CompressionSettingsTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 				5A0A24C3174843D0003264CC /* Tools/pngquant in CopyFiles */,
 				305BB8F155CD4EA08143130C /* Tools/oxipng in CopyFiles */,
 				8D1C0E2F4B6A4A1B8E9F0C1D /* Tools/zopflipng in CopyFiles */,
+				A1B2C3D4E5F60718 /* Tools/posterize in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +136,7 @@
 		8D15AC370486D014006FF6A4 /* ImageAlpha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageAlpha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/zopflipng; sourceTree = SOURCE_ROOT; };
 		910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/oxipng; sourceTree = SOURCE_ROOT; };
+		A1B2C3D4E5F60719 /* Tools/posterize */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = Tools/posterize; sourceTree = SOURCE_ROOT; };
 		AABBCCDD00112234 /* CompressionSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompressionSettingsTests.swift; sourceTree = "<group>"; };
 		AABBCCDD00112236 /* ImageAlphaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageAlphaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -196,6 +199,7 @@
 				6D8D2A278C044808BD473D3F /* Tools/pngquant */,
 				910B5FC68B8E4DFC8644BC89 /* Tools/oxipng */,
 				8D1C0E2F4B6A4A1B8E9F0C1E /* Tools/zopflipng */,
+				A1B2C3D4E5F60719 /* Tools/posterize */,
 				2A37F4B8FDCFA73011CA2CEA /* Resources */,
 				2A37F4C3FDCFA73011CA2CEA /* Frameworks */,
 				19C28FB0FE9D524F11CA2CBB /* Products */,

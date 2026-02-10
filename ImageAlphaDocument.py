@@ -16,6 +16,7 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 	backgroundsView = objc.IBOutlet()
 	progressBarView = objc.IBOutlet()
 	savePanelView = objc.IBOutlet()
+	modeSegmentedControl = objc.IBOutlet()
 
 	def windowNibName(self):
 		return u"ImageAlphaDocument"
@@ -164,6 +165,7 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 		self.setDocumentImage_(docimg);
 		docimg.setCallbackWhenImageChanges_(self);
 		self.setDisplayImage_(docimg.image());
+		self.updateModeSegmentLabel()
 
 		# Restore remembered color count if enabled
 		defaults = NSUserDefaults.standardUserDefaults()
@@ -181,8 +183,15 @@ class ImageAlphaDocument(ImageAlphaDocumentC):
 		self.backgroundsView.setSelectable_(YES if image is not None else NO);
 		#NSLog("Set new display image %s" % image);
 
+	@objc.python_method
+	def updateModeSegmentLabel(self):
+		if self.modeSegmentedControl and self.documentImage():
+			self.modeSegmentedControl.setLabel_forSegment_(
+				self.documentImage().colorsOrLevelsLabel(), 0)
+
 	def imageChanged(self):
 		assert self.documentImage() is not None
+		self.updateModeSegmentLabel()
 		self.setDisplayImage_(self.documentImage().image());
 		data = self.documentImage().imageData()
 		self.updateProgressbar()

@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="backgroundsView" destination="1104" id="1109"/>
                 <outlet property="leftPaneView" destination="1097" id="1165"/>
+                <outlet property="modeSegmentedControl" destination="30010" id="30011"/>
                 <outlet property="progressBarView" destination="886" id="887"/>
                 <outlet property="savePanelView" destination="1023" id="1025"/>
                 <outlet property="statusBarView" destination="581" id="723"/>
@@ -53,6 +54,9 @@
                                                             <menuItem title="Median Cut (pngquant)" state="on" id="1114">
                                                                 <accessibility description="Median Cut is best for small number of colors or images with very varying colors"/>
                                                             </menuItem>
+                                                            <menuItem title="Posterizer" id="30001">
+                                                                <accessibility description="Posterizer reduces per-channel color levels for better compression"/>
+                                                            </menuItem>
                                                         </items>
                                                     </menu>
                                                 </popUpButtonCell>
@@ -70,6 +74,26 @@
                                                     </binding>
                                                 </connections>
                                             </popUpButton>
+                                            <!-- Mode segmented control: Colors/Levels vs Quality -->
+                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="30010">
+                                                <rect key="frame" x="0" y="260" width="206" height="24"/>
+                                                <segmentedCell key="cell" trackingMode="selectOne" alignment="left" style="rounded" id="30014">
+                                                    <font key="font" metaFont="system"/>
+                                                    <segments>
+                                                        <segment label="Colors" width="100" tag="0"/>
+                                                        <segment label="Quality" width="100" tag="1"/>
+                                                    </segments>
+                                                </segmentedCell>
+                                                <connections>
+                                                    <binding destination="-2" name="enabled" keyPath="documentImage" id="30012">
+                                                        <dictionary key="options">
+                                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                        </dictionary>
+                                                    </binding>
+                                                    <binding destination="-2" name="selectedIndex" keyPath="documentImage.qualityMode" id="30013"/>
+                                                </connections>
+                                            </segmentedControl>
                                             <!-- Colors section -->
                                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="4" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="colors-section-stack">
                                                 <rect key="frame" x="0" y="224" width="206" height="51"/>
@@ -95,6 +119,7 @@
                                                                     <constraint firstAttribute="height" constant="17" id="colors-spacer-1-h"/>
                                                                 </constraints>
                                                             </view>
+                                                            <!-- Colors value field (hidden in quality mode) -->
                                                             <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="421">
                                                                 <rect key="frame" x="162" y="0" width="28" height="17"/>
                                                                 <constraints>
@@ -131,7 +156,30 @@
                                                                             <string key="NSValueTransformerName">NSNegateBoolean</string>
                                                                         </dictionary>
                                                                     </binding>
+                                                                    <binding destination="-2" name="hidden" keyPath="documentImage.qualityMode" id="30020"/>
                                                                     <outlet property="nextKeyView" destination="403" id="1172"/>
+                                                                </connections>
+                                                            </textField>
+                                                            <!-- Quality value field (hidden in colors mode) -->
+                                                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="30021">
+                                                                <rect key="frame" x="162" y="0" width="28" height="17"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="28" id="quality-value-width"/>
+                                                                </constraints>
+                                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" alignment="right" title="80" id="30022">
+                                                                    <font key="font" metaFont="system"/>
+                                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                                </textFieldCell>
+                                                                <connections>
+                                                                    <binding destination="-2" name="enabled" keyPath="documentImage" id="30023">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                                        </dictionary>
+                                                                    </binding>
+                                                                    <binding destination="-2" name="value" keyPath="documentImage.quality" id="30024"/>
+                                                                    <binding destination="-2" name="hidden" keyPath="documentImage.colorsMode" id="30025"/>
                                                                 </connections>
                                                             </textField>
                                                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="886" userLabel="Async Arrows">
@@ -142,7 +190,7 @@
                                                             <constraint firstAttribute="width" constant="206" id="colors-header-width"/>
                                                         </constraints>
                                                     </stackView>
-                                                    <!-- Slider row -->
+                                                    <!-- Colors slider row (hidden in quality mode) -->
                                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="colors-slider-row">
                                                         <rect key="frame" x="0" y="0" width="206" height="26"/>
                                                         <subviews>
@@ -225,6 +273,36 @@
                                                                 </connections>
                                                             </stepper>
                                                         </subviews>
+                                                        <connections>
+                                                            <binding destination="-2" name="hidden" keyPath="documentImage.qualityMode" id="30030"/>
+                                                        </connections>
+                                                    </stackView>
+                                                    <!-- Quality slider row (hidden in colors mode) -->
+                                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="quality-slider-row">
+                                                        <rect key="frame" x="0" y="0" width="206" height="26"/>
+                                                        <subviews>
+                                                            <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="30031">
+                                                                <rect key="frame" x="0" y="0" width="206" height="25"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="206" id="quality-slider-width"/>
+                                                                </constraints>
+                                                                <sliderCell key="cell" continuous="YES" state="on" alignment="left" minValue="0" maxValue="100" doubleValue="80" tickMarkPosition="below" numberOfTickMarks="11" sliderType="linear" id="30032">
+                                                                    <font key="font" metaFont="system"/>
+                                                                </sliderCell>
+                                                                <connections>
+                                                                    <binding destination="-2" name="enabled" keyPath="documentImage" id="30033">
+                                                                        <dictionary key="options">
+                                                                            <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                            <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                                        </dictionary>
+                                                                    </binding>
+                                                                    <binding destination="-2" name="value" keyPath="documentImage.quality" id="30034"/>
+                                                                </connections>
+                                                            </slider>
+                                                        </subviews>
+                                                        <connections>
+                                                            <binding destination="-2" name="hidden" keyPath="documentImage.colorsMode" id="30035"/>
+                                                        </connections>
                                                     </stackView>
                                                 </subviews>
                                             </stackView>
@@ -300,6 +378,28 @@ IA
                                                                 </dictionary>
                                                             </binding>
                                                             <outlet property="nextKeyView" destination="1003" id="1177"/>
+                                                        </connections>
+                                                    </button>
+                                                    <!-- Blur mode checkbox (visible only for Posterizer) -->
+                                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="30040">
+                                                        <rect key="frame" x="0" y="0" width="92" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Blur mode" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="30041">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <binding destination="-2" name="enabled" keyPath="documentImage" id="30042">
+                                                                <dictionary key="options">
+                                                                    <bool key="NSRaisesForNotApplicableKeys" value="NO"/>
+                                                                    <string key="NSValueTransformerName">NSIsNotNil</string>
+                                                                </dictionary>
+                                                            </binding>
+                                                            <binding destination="-2" name="value" keyPath="documentImage.blur" id="30043"/>
+                                                            <binding destination="-2" name="hidden" keyPath="documentImage.showBlurCheckbox" id="30044">
+                                                                <dictionary key="options">
+                                                                    <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                </dictionary>
+                                                            </binding>
                                                         </connections>
                                                     </button>
                                                 </subviews>

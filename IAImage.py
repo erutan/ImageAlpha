@@ -19,17 +19,42 @@ class Quantizer(object):
     def numberOfColorsToQuality(self, colors):
         return colors;
 
-    def versionId(self, colors, dithering):
-        return "c%d:m%s:d%d" % (self.numberOfColorsToQuality(colors), self.__class__.__name__, dithering)
+    def versionId(self, colors, dithering, quality_mode=False, quality=0, blur=False):
+        if quality_mode:
+            return "q%d:m%s:d%d:b%d" % (quality, self.__class__.__name__, dithering, blur)
+        return "c%d:m%s:d%d:b%d" % (self.numberOfColorsToQuality(colors), self.__class__.__name__, dithering, blur)
 
 class Pngquant(Quantizer):
-    def launchArguments(self, dither, colors):
+    def launchArguments(self, dither, colors, quality_mode=False, quality=None, blur=False):
         args = []
         if not dither:
             args.append("--nofs")
-        args.append("%d" % colors)
+        if quality_mode and quality is not None:
+            args.extend(["--quality=0-%d" % quality, "256"])
+        else:
+            args.append("%d" % colors)
         args.append("-")
         return ("pngquant", args)
+
+class Posterizer(Quantizer):
+    def qualityLabel(self):
+        return "Levels"
+
+    def preferredDithering(self):
+        return False
+
+    def launchArguments(self, dither, colors, quality_mode=False, quality=None, blur=False):
+        args = []
+        if blur:
+            args.append("-b")
+        if dither:
+            args.append("-d")
+        if quality_mode and quality is not None:
+            args.extend(["-Q", "%d" % quality])
+        else:
+            args.append("%d" % min(int(colors), 255))
+        # posterize uses stdin/stdout automatically when no files specified
+        return ("posterize", args)
 
 
 class IAImage(NSObject):
@@ -43,11 +68,15 @@ class IAImage(NSObject):
 
     _numberOfColors = 256;
 
-    _quantizationMethod = 0; # 0 = pngquant
+    _quantizationMethod = 0; # 0 = pngquant, 1 = posterizer
     _quantizationMethods = [
         Pngquant(),
+        Posterizer(),
     ]
     _dithering = YES
+    _qualityMode = False
+    _quality = 80
+    _blur = False
     _losslessMode = 1  # 0 = none, 1 = oxipng, 2 = zopflipng
 
     callbackWhenImageChanges = None
@@ -150,6 +179,44 @@ class IAImage(NSObject):
         return self._numberOfColors
 
     def qualityLabel(self):
+        if self._qualityMode:
+            return "Quality"
+        return self.quantizer().qualityLabel()
+
+    def qualityMode(self):
+        return self._qualityMode
+
+    def setQualityMode_(self, val):
+        self.willChangeValueForKey_("qualityMode")
+        self.willChangeValueForKey_("colorsMode")
+        self.willChangeValueForKey_("qualityLabel")
+        self._qualityMode = int(val) > 0
+        self.didChangeValueForKey_("qualityLabel")
+        self.didChangeValueForKey_("colorsMode")
+        self.didChangeValueForKey_("qualityMode")
+        self.update()
+
+    def colorsMode(self):
+        return not self._qualityMode
+
+    def quality(self):
+        return self._quality
+
+    def setQuality_(self, val):
+        self._quality = max(0, min(100, int(val)))
+        self.update()
+
+    def blur(self):
+        return self._blur
+
+    def setBlur_(self, val):
+        self._blur = int(val) > 0
+        self.update()
+
+    def showBlurCheckbox(self):
+        return self._quantizationMethod == 1
+
+    def colorsOrLevelsLabel(self):
         return self.quantizer().qualityLabel()
 
     def setNumberOfColors_(self,num):
@@ -169,10 +236,14 @@ class IAImage(NSObject):
         return self._quantizationMethods[self._quantizationMethod]
 
     def setQuantizationMethod_(self,num):
-        self.willChangeValueForKey_("qualityLabel");
+        self.willChangeValueForKey_("qualityLabel")
+        self.willChangeValueForKey_("showBlurCheckbox")
+        self.willChangeValueForKey_("colorsOrLevelsLabel")
         max_index = len(self._quantizationMethods) - 1
         self._quantizationMethod = max(0, min(int(num), max_index))
-        self.didChangeValueForKey_("qualityLabel");
+        self.didChangeValueForKey_("colorsOrLevelsLabel")
+        self.didChangeValueForKey_("showBlurCheckbox")
+        self.didChangeValueForKey_("qualityLabel")
 
         self.updateDithering()
         self.update()
@@ -195,7 +266,9 @@ class IAImage(NSObject):
 
             elif id not in self.versions:
                 self.versions[id] = IAImageVersion.alloc().init()
-                self.versions[id].generateFromPath_method_dither_lossless_colors_callback_(self.path, self.quantizer(), self.dithering(), self.losslessMode(), self.numberOfColors(), self)
+                self.versions[id].generateFromPath_method_dither_lossless_colors_quality_qualityMode_blur_callback_(
+                    self.path, self.quantizer(), self.dithering(), self.losslessMode(),
+                    self.numberOfColors(), self._quality, self._qualityMode, self._blur, self)
 
                 if self.callbackWhenImageChanges is not None: self.callbackWhenImageChanges.updateProgressbar();
 
@@ -206,7 +279,8 @@ class IAImage(NSObject):
                 if self.callbackWhenImageChanges is not None: self.callbackWhenImageChanges.imageChanged();
 
     def currentVersionId(self):
-        base_id = self.quantizer().versionId(self.numberOfColors(), self.dithering())
+        base_id = self.quantizer().versionId(self.numberOfColors(), self.dithering(),
+            quality_mode=self._qualityMode, quality=self._quality, blur=self._blur)
         return "%s:l%d" % (base_id, self.losslessMode())
 
     def destroy(self):
@@ -225,13 +299,14 @@ class IAImageVersion(NSObject):
     callbackWhenFinished = None
     losslessMode = 0
 
-    def generateFromPath_method_dither_lossless_colors_callback_(self,path,quantizer,dither,losslessMode,colors,callbackWhenFinished):
+    def generateFromPath_method_dither_lossless_colors_quality_qualityMode_blur_callback_(self,path,quantizer,dither,losslessMode,colors,quality,qualityMode,blur,callbackWhenFinished):
 
         self.isDone = False
         self.callbackWhenFinished = callbackWhenFinished
         self.losslessMode = int(losslessMode)
 
-        (executable, args) = quantizer.launchArguments(dither, colors)
+        (executable, args) = quantizer.launchArguments(dither, colors,
+            quality_mode=qualityMode, quality=quality, blur=blur)
 
         task = NSTask.alloc().init()
         self.task = task
