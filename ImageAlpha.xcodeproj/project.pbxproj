@@ -599,7 +599,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.0b1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlpha;
 				PRODUCT_NAME = ImageAlpha;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -644,7 +644,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0;
+				MARKETING_VERSION = 2.0.0b1;
 				OTHER_CODE_SIGN_FLAGS = "--timestamp";
 				PRODUCT_BUNDLE_IDENTIFIER = net.pornel.ImageAlpha;
 				PRODUCT_NAME = ImageAlpha;
