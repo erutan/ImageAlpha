@@ -45,10 +45,6 @@
 	<string>2.0.0</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.graphics-design</string>
-	<key>LSArchitecturePriority</key>
-	<array>
-		<string>x86_64</string>
-	</array>
 	<key>LSEnvironment</key>
 	<dict>
 		<key>PYTHONDONTWRITEBYTECODE</key>

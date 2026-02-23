@@ -25,33 +25,37 @@ find "$APP" -type d -name "__pycache__" -exec rm -rf {} + 2>/dev/null || true
 find "$APP" -type f -name "*.pyc" -delete 2>/dev/null || true
 echo "  Removed __pycache__ directories and .pyc files"
 
-# Step 0.5: Bundle pngquant's Homebrew library dependencies
+# Step 0.5: Bundle pngquant's Homebrew library dependencies (universal)
 echo ""
-echo "=== Step 0.5: Bundling pngquant libraries ==="
+echo "=== Step 0.5: Bundling universal pngquant libraries ==="
 MACOS_DIR="$APP/Contents/MacOS"
 PNGQUANT="$MACOS_DIR/pngquant"
-LCMS2_SRC="/opt/homebrew/opt/little-cms2/lib/liblcms2.2.dylib"
-LIBPNG_SRC="/opt/homebrew/opt/libpng/lib/libpng16.16.dylib"
+ARM64_LCMS2="/opt/homebrew/opt/little-cms2/lib/liblcms2.2.dylib"
+X86_LCMS2="/usr/local/opt/little-cms2/lib/liblcms2.2.dylib"
+ARM64_LIBPNG="/opt/homebrew/opt/libpng/lib/libpng16.16.dylib"
+X86_LIBPNG="/usr/local/opt/libpng/lib/libpng16.16.dylib"
 
-if [ -f "$PNGQUANT" ] && [ -f "$LCMS2_SRC" ] && [ -f "$LIBPNG_SRC" ]; then
+if [ -f "$PNGQUANT" ] && [ -f "$ARM64_LCMS2" ] && [ -f "$X86_LCMS2" ] && [ -f "$ARM64_LIBPNG" ] && [ -f "$X86_LIBPNG" ]; then
     # Check if pngquant still references Homebrew paths (not already bundled)
-    if otool -L "$PNGQUANT" | grep -q "/opt/homebrew"; then
-        echo "  Copying liblcms2.2.dylib..."
-        cp "$LCMS2_SRC" "$MACOS_DIR/liblcms2.2.dylib"
-        echo "  Copying libpng16.16.dylib..."
-        cp "$LIBPNG_SRC" "$MACOS_DIR/libpng16.16.dylib"
+    if otool -L "$PNGQUANT" | grep -qE "/opt/homebrew|/usr/local/opt"; then
+        echo "  Creating universal liblcms2.2.dylib..."
+        lipo -create "$ARM64_LCMS2" "$X86_LCMS2" -output "$MACOS_DIR/liblcms2.2.dylib"
+        echo "  Creating universal libpng16.16.dylib..."
+        lipo -create "$ARM64_LIBPNG" "$X86_LIBPNG" -output "$MACOS_DIR/libpng16.16.dylib"
         echo "  Fixing library paths in pngquant..."
         install_name_tool -change "/opt/homebrew/opt/little-cms2/lib/liblcms2.2.dylib" "@executable_path/liblcms2.2.dylib" "$PNGQUANT"
+        install_name_tool -change "/usr/local/opt/little-cms2/lib/liblcms2.2.dylib" "@executable_path/liblcms2.2.dylib" "$PNGQUANT"
         install_name_tool -change "/opt/homebrew/opt/libpng/lib/libpng16.16.dylib" "@executable_path/libpng16.16.dylib" "$PNGQUANT"
+        install_name_tool -change "/usr/local/opt/libpng/lib/libpng16.16.dylib" "@executable_path/libpng16.16.dylib" "$PNGQUANT"
         echo "  Fixing library IDs..."
         install_name_tool -id "@executable_path/liblcms2.2.dylib" "$MACOS_DIR/liblcms2.2.dylib"
         install_name_tool -id "@executable_path/libpng16.16.dylib" "$MACOS_DIR/libpng16.16.dylib"
-        echo "  Libraries bundled successfully"
+        echo "  Universal libraries bundled successfully"
     else
-        echo "  Libraries already bundled (pngquant doesn't reference /opt/homebrew)"
+        echo "  Libraries already bundled (pngquant doesn't reference Homebrew paths)"
     fi
 else
-    echo "  Skipping library bundling (pngquant or Homebrew libs not found)"
+    echo "  Skipping library bundling (pngquant or Homebrew libs not found on both architectures)"
 fi
 
 # Find Developer ID Application certificate
